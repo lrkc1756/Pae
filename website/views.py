@@ -27,9 +27,8 @@ def home():
 def contact():
     # Dynamic data
     people = [
-        {"name": "Prof. Prof. Dr. Dr. John Doe", "email": "pae@umwelt-campus.de", "description": "PAE-e-green", "image": "static/img/john.jpg"},
-        {"name": "Frau Lauren Koch", "email": "pae@umwelt-campus.de", "description": "PAE-e-green Hiwi", "image": "static/img/jane.jpg"},
-        {"name": "Mark Turner BSc", "email": "student@umwelt-campus.de", "description": "LCA Demonstrator Creator", "image": "static/img/mark.jpg"}
+        {"name": "Prof. Dr. -Ing. Matthias Vette-Steinkamp", "email": "m.vette-steinkamp@umwelt-campus.de", "description": "Projektleiter", "image": "matthias.png", "tel": "+49 6782 17 1881"},
+        {"name": "Rida Ahmed, M.Sc", "email": "R.Ahmed@umwelt-campus.de", "description": "Projektleiterin", "image": "rida.png", "tel": "+49 678217-1534"}
     ]
     return render_template("contact.html", people=people, user=current_user)
 
