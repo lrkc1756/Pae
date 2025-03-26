@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Kontakt{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>PAE-e-Green</h2>
+    <div class="column">
+        {% for person in people %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename=person.image) }}" class="card-img-top" alt="{{ person.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ person.name }}</h5>
+                    <p>{{ person.description }}</p>
+                    <p><strong>Email:</strong> {{ person.email }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

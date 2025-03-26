@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Demo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Demonstrator Overview</h2>
+    
+    <!-- Video Section -->
+    <div class="embed-responsive embed-responsive-16by9 mb-4">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Description Section -->
+    <div>
+        <h3>What is the Demonstrator?</h3>
+        <p>This demonstrator is a tool designed to help visualize the principles of life-cycle assessment (LCA) and how they relate to various systems. The purpose of the demonstrator is to make learning these concepts easier and more accessible.</p>
+        
+        <h3>How Does It Work?</h3>
+        <p>The demonstrator works by showcasing different aspects of LCA in a step-by-step process, guiding the user through each phase and providing helpful insights along the way. The system is interactive and aims to simplify complex topics into understandable segments.</p>
+    </div>
+</div>
+{% endblock %}
