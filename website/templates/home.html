@@ -1,98 +1,96 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
-    <h1 align="center">Kategorie 1</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <h1 align="center">Arbeitspaket 1</h1>
+    <p>Short description of LCA Demonstrator: <a href="https://www.openlca.org/features/">Open LCA Demonstrator</a></p>
+    
     <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
+      <div class="form-group">
+        <label for="email">Company Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="companyEmail"
+          name="email"
+          placeholder="Enter company email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="firstName">Company Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="companyName"
+          name="companyName"
+          placeholder="Enter company name"
+        />
+      </div>
       <br />
       <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+        <button type="submit" class="btn btn-primary">als Akteur eintragen</button>
+      </div>
+    </form>
+  </br> 
+
+    <h1 align="center">Arbeitspaket 2</h1> 
+    <p>Short description of second LCA Demonstrator: <a href="https://www.openlca.org/features/">Open LCA Demonstrator 2</a></p>
+    
+    <form method="POST">
+      <div class="form-group">
+        <label for="email">Company Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="companyEmail"
+          name="email"
+          placeholder="Enter company email 2"
+        />
+      </div>
+      <div class="form-group">
+        <label for="firstName">Company Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="companyName"
+          name="companyName"
+          placeholder="Enter company name 2"
+        />
+      </div>
+      <br />
+      <div align="center">
+        <button type="submit" class="btn btn-primary">als Akteur eintragen</button>
       </div>
     </form>
 
-    <h1 align="center">Kategorie 2</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
-    <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
-      </div>
-    </form>
+  </br> 
 
-    <h1 align="center">Kategorie 3</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
-    <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
-      </div>
-    </form>
 
-    <h1 align="center">Kategorie 4</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
-    <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
-      </div>
-    </form>
+    <h1 align="center">Arbeitspaket 3</h1>
+      <a>LCA Demonstrator hier probieren: <a href="{{url_for('views.demo')}}">UCB LCA Demonstrator</a> 
+</br>
 
-    <h1 align="center">Kategorie 5</h1>
-    <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
-    <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+<div class="container mt-4">
+  <h2>PAE-e-Green</h2>
+  <div class="row justify-content-between">
+      {% for demo in demonstrator %} 
+      <div class="col-md-4 mb-4 d-flex align-items-stretch">
+          <div class="card text-center" style="width: 100%; min-width: 180px; height: 360px;">
+              <img src="{{ url_for('static', filename=demo.image) }}" class="card-img-top" alt="{{ demo.name }}">
+              <div class="card-body">
+                  <h5 class="card-title">{{ demo.name }}</h5>
+                  <p>{{ demo.description }}</p>
+              </div>
+          </div>
+        {% endfor %}
+        </div> 
       </div>
-    </form>
+      {% endblock %}
+  
+</br> 
 
-    {% endblock %}
+    <h1 align="center">Arbeitspaket 4</h1>
+    <h1 align="center">Arbeitspaket 5</h1>
+
+    
+
