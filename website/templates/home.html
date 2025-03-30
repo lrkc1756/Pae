@@ -71,26 +71,37 @@
 </br>
 
 <div class="container mt-4">
-  <h2>PAE-e-Green</h2>
+  <h2>Demonstratoren</h2>
   <div class="row justify-content-between">
       {% for demo in demonstrator %} 
-      <div class="col-md-4 mb-4 d-flex align-items-stretch">
-          <div class="card text-center" style="width: 100%; min-width: 180px; height: 360px;">
-              <img src="{{ url_for('static', filename=demo.image) }}" class="card-img-top" alt="{{ demo.name }}">
+      <div class="col-md-6 mb-4 d-flex align-items-stretch">
+          <div class="card text-center" style="width: 100%; min-width: 180px; height: 260px;">
+              <img src="{{ url_for('static', filename=demo.image) }}" class="card-img-top mx-auto d-block" alt="{{ demo.name }}" style="height: 100px; max-width: 95%; object-fit:contain; margin-top: 20px;">
               <div class="card-body">
                   <h5 class="card-title">{{ demo.name }}</h5>
                   <p>{{ demo.description }}</p>
+                </div>
               </div>
-          </div>
-        {% endfor %}
-        </div> 
-      </div>
-      {% endblock %}
-  
-</br> 
+            </div>
+          {% endfor %}
+        </div> <!-- closes row -->
+      </div> <!-- closes container -->
+    
+    <div class="w-100"></div> <!-- ensures new line starts -->
+
+    </br> 
 
     <h1 align="center">Arbeitspaket 4</h1>
+    <p>Webinare/Seminare Erinnerung mit Outlook: <a href="https://www.openlca.org/features/">Teams Calendar</a></p>
+    <p>View Event on Eventbrite: <a href="https://www.openlca.org/features/">Eventbrite Anmeldung</a></p>
+  </br>
+
     <h1 align="center">Arbeitspaket 5</h1>
+    <p>Another Webinare/Seminare Erinnerung mit Outlook: <a href="https://www.openlca.org/features/">Teams Calendar</a></p>
+    <p>Another View Event on Eventbrite: <a href="https://www.openlca.org/features/">Different Eventbrite Anmeldung</a></p>
+    
+    {% endblock %}
+  
 
     
 

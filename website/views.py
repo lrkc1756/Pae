@@ -10,11 +10,12 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def home():
     demonstrator = [
-        {"name": "LCA", "description": "LCA where you can try over website platform", "image": "lca.png"},
-        {"name": "Eco Design", "description": "Has eco design.", "image": "eco_design.png"},
-        {"name": "Gesamtheitliches", "description": "Not entirely sure", "image": "gesamtheitliches.png"},
-        {"name": "Energy Consumer", "description": "A physical system.", "image": "energy_consumer.png"},
-        {"name": "Plastic Recycling", "description": "Also a physical system.", "image": "plastic_recycling.png"}
+        {"name": "LCA", "description": "Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes", "image": "lca.png"},
+        {"name": "Eco Design", "description": "Veranschaulichung Nachhaltigkeit durch intelligentes Design", "image": "eco_design.png"},
+        {"name": "Ganzheitliches Energiemanagement", "description": "Veranschaulichung Emissions-reduzierung durch Energie", "image": "ganzheitliches.png"},
+        {"name": "Energy Measurement", "description": "Erreichen von hochauflösender Erfassung von Energie- und Stoffströmen", "image": "energy.png"},
+        {"name": "Plastic Recycling", "description": "Einarbeitung von Produktions-abfall in neue Teile", "image": "plastic_recycling.png"}, 
+        {"name": "", "description": "", "image":"logo.png"}
     ]
         
     if request.method == 'POST': 

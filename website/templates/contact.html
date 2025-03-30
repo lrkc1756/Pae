@@ -6,7 +6,7 @@
     <h2>PAE-e-Green</h2>
     <div class="column">
         {% for person in people %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 mb-4">
             <div class="card">
                 <img src="{{ url_for('static', filename=person.image) }}" class="card-img-top" alt="{{ person.name }}">
                 <div class="card-body">
