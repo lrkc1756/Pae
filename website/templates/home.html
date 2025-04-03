@@ -45,7 +45,27 @@
 
     <h1 align="center">Arbeitspaket 4</h1>
     <p>Webinare/Seminare Erinnerung mit Outlook: <a href="https://www.openlca.org/features/">Teams Calendar</a></p>
-    <p>View Event on Eventbrite: <a href="https://www.openlca.org/features/">Eventbrite Anmeldung</a></p>
+    <p>View Event on Eventbrite: </p>
+    <div id="eventbrite-widget-container-1312149858549"></div>
+
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+
+<script type="text/javascript">
+    var exampleCallback = function() {
+        console.log('Order complete!');
+    };
+
+    window.EBWidgets.createWidget({
+        // Required
+        widgetType: 'checkout',
+        eventId: '1312149858549',
+        iframeContainerId: 'eventbrite-widget-container-1312149858549',
+
+        // Optional
+        iframeContainerHeight: 425,  // Widget height in pixels. Defaults to a minimum of 425px if not provided
+        onOrderComplete: exampleCallback  // Method called when an order has successfully completed
+    });
+</script>
   </br>
 
     <h1 align="center">Arbeitspaket 5</h1>
