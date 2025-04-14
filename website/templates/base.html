@@ -21,7 +21,7 @@
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
       <button
         class="navbar-toggler"
         type="button"
@@ -32,14 +32,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" id="home" href="/">Start</a>
-          <a class="nav-item nav-link" id="demo" href="{{url_for('views.demo')}}">Demo</a>
-          <a class="nav-item nav-link" id="about_us" href="{{url_for('views.about')}}">Über Uns</a>
-          <a class="nav-item nav-link" id="contact" href="{{url_for('views.contact')}}">Kontakt</a> 
+          <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="/">Start</a>
+          <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo') }}">Demo</a>
+          <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about') }}">Über Uns</a>
+          <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact') }}">Kontakt</a>
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link {% if request.path == '/logout' %}active{% endif %}" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Anmelden</a>
+          <a class="nav-item nav-link {% if request.path == '/login' or request.path == '/sign-up' %}active{% endif %}" id="login" href="{{ url_for('auth.login') }}">Anmelden</a>
           {% endif %}
         </div>
       </div>

@@ -1,0 +1,32 @@
+.custom-navbar {
+    background-color: #003399;
+  }
+  
+/* Custom Navbar Text */
+.custom-navbar .nav-link {
+    color: #e2e8f0 !important; /* Stone Gray */
+  }
+  
+  /* Optional: hover effect */
+  .custom-navbar .nav-link:hover {
+    color: #ffffff !important; /* White on hover for contrast */
+  }
+  
+
+/* Navbar toggler border */
+.custom-navbar .navbar-toggler {
+    border: 2px solid #e2e8f0; /* white border for contrast */
+  }
+  
+  /* Icon lines inside the toggler */
+  .custom-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+  
+
+/* Style the active nav link */
+.custom-navbar .nav-link.active {
+    color: #1A1A1A !important;  /* Dark gray */
+    font-weight: bold;
+  }
+  
