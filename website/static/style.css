@@ -54,4 +54,18 @@
     box-shadow: none;
   }
   
-  
+
+
+/*FORM TEXT BACKGROUND*/ 
+  /* Input field background color for forms */
+.form-control {
+  background-color: #e2e8f0 !important;
+  border: 1.5px solid #ccc;
+  color: #1a1a1a;
+}
+
+.form-control:focus {
+  background-color: #e2e8f0;
+  border-color: #8bc34a; /* optional: green border on focus */
+  box-shadow: none;
+}
