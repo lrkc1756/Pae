@@ -50,6 +50,10 @@ def demo():
 def about():
     return render_template("about.html", user=current_user)
 
+@views.route('/co2')
+def about():
+    return render_template("co2.html", user=current_user)
+
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  

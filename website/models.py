@@ -15,6 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    notes = db.relationship('Note') 
+    notes = db.relationship('Note') #one user to many notes relationship
     
 #can add another database class to save videos or LCA demonstrator or photos
