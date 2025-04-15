@@ -1,6 +1,8 @@
 /* Navbar Style */
 .custom-navbar {
     background-color: #003399;
+    position: relative;
+    z-index: 1000;
   }
   
 /* Custom Navbar Text */
