@@ -2,35 +2,40 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
+<div class="white">
     <h1 align="center">Arbeitspaket 1</h1>
     <p>Short description of LCA Demonstrator: <a href="https://www.openlca.org/features/">Open LCA Demonstrator</a></p>
     
-    <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__Q0ndhhUNExPRkFSUTlKTldNMDYzR0s3RzM0MjRROC4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-
+    <iframe width="100%" height="450px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__Q0ndhhUNExPRkFSUTlKTldNMDYzR0s3RzM0MjRROC4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
   </br> 
+</div>
 
+  <div class="tea-leaf">
     <h1 align="center">Arbeitspaket 2</h1> 
     <p>Short description of second LCA Demonstrator: <a href="https://www.openlca.org/features/">Open LCA Demonstrator 2</a></p>
     
-    <iframe width="640px" height="480px" src="https://forms.microsoft.com/r/gfQK95VuJ2?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
- 
+    <iframe width="100%" height="450px" src="https://forms.microsoft.com/r/gfQK95VuJ2?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+  </div> 
 
+<div class="medium-gray">
   </br> 
 
 
-    <h1 align="center">Arbeitspaket 3</h1>
+
+    <h1 align="center" class="dark-gray-text">Arbeitspaket 3</h1>
       <a>LCA Demonstrator hier probieren: <a href="{{url_for('views.demo')}}">UCB LCA Demonstrator</a> 
 </br>
 
-<div class="container mt-4">
-  <h2>Demonstratoren</h2>
+
+<div class="container-fluid mt-4">
+  <h2 class="dark-gray-text">Demonstratoren</h2>
   <div class="row justify-content-between">
       {% for demo in demonstrator %} 
       <div class="col-md-6 mb-4 d-flex align-items-stretch">
       {% if demo.link %}
       <a href="{{demo.link}}" class="text-decoration-none text-dark w-100">
         {% endif %}
-          <div class="card text-center" style="width: 100%; min-width: 180px; height: 260px;">
+          <div class="card text-center green-border-card" style="width: 100%; min-width: 180px; height: 260px;">
               <img src="{{ url_for('static', filename=demo.image) }}" class="card-img-top mx-auto d-block" alt="{{ demo.name }}" style="height: 100px; max-width: 95%; object-fit:contain; margin-top: 20px;">
               <div class="card-body">
                   <h5 class="card-title">{{ demo.name }}</h5>
@@ -46,7 +51,9 @@
       </div> <!-- closes container -->
     
     <div class="w-100"></div> <!-- ensures new line starts -->
+    </div> 
 
+    <div class="white">
     </br> 
 
     <h1 align="center">Arbeitspaket 4</h1>
@@ -72,6 +79,9 @@
         onOrderComplete: exampleCallback  // Method called when an order has successfully completed
     });
 </script>
+</div> 
+
+<div class="tea-leaf"> 
   </br>
 
     <h1 align="center">Arbeitspaket 5</h1>
@@ -97,6 +107,7 @@
         onOrderComplete: exampleCallback  // Method called when an order has successfully completed
     });
 </script>
+</div>
     
     {% endblock %}
   

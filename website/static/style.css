@@ -71,3 +71,39 @@
   border-color: #8bc34a; /* optional: green border on focus */
   box-shadow: none;
 }
+
+
+/*HOME ARBEITSPAKET 3*/
+.green-border-card{
+  border: 2px solid #8bc34a;
+}
+
+/*HOME DIV BACKGROUND COLORS*/
+
+.dark-gray{
+  background-color: #1A1A1A;
+}
+
+.tea-leaf{
+  background-color: 		#ecf4e9;
+}
+
+.medium-gray{
+  background-color: #edf2f7;
+}
+
+.white{
+  background-color: white;
+}
+
+.light-grey-text{
+  color: #e2e8f0; 
+}
+
+.dark-gray-text{
+  color: #1A1A1A;
+}
+
+.medium-gray-text {
+  color: #7a7f85;
+}
