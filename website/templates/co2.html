@@ -1,16 +1,18 @@
-{% extends "base.html" %}
-{% block title %}LCA Demonstrator{% endblock %}
-
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Manager</title>
-    <!-- Add Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
+        h3 {
+            text-align: center;
+            font-weight: bold;
+        }
+
         .project-name.editable {
             cursor: text;
         }
@@ -214,7 +216,6 @@
         #output-section {
             order: 3;
             flex-grow: 1;
-            width: 100%;
             max-width: 800px;
         }
 
@@ -235,10 +236,10 @@
             font-size: 1.2em;
         }
         
-        /* 新增样式 */
         .custom-input-container {
             display: flex;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
         .custom-input {
             flex-grow: 1;
@@ -256,7 +257,6 @@
             cursor: pointer;
         }
 
-        /* Chart container styles */
         .chart-container {
             display: flex;
             flex-wrap: wrap;
@@ -279,6 +279,35 @@
             margin-bottom: 10px;
             font-size: 16px;
         }
+
+        #generate-report-btn {
+            margin-top: 15px;
+            background-color: #003300;
+            color: #98FB98;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .custom-input-container input.custom-input {
+            flex-grow: 1;
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .custom-input-container input.custom-input:last-child {
+            margin-right: 0;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.8em;
+            margin-top: 3px;
+            display: block;
+            text-align: left;
+        }
+
     </style>
 </head>
 <body>
@@ -353,12 +382,24 @@
             ]
         };
 
-        // 存储自定义选项
         const customOptions = {
-            materials: ['welding rod', 'electrodes', 'fluxes', 'coolants'],
-            rawMaterials: ['aluminium', 'steel', 'plastics', 'electrical components', 'glass', 'composite materials'],
-            additionalMaterials: ['screws', 'adhesives', 'seals', 'lubricants']
+            materials: ['no', 'welding rod', 'electrodes', 'fluxes', 'coolants'],
+            rawMaterials: ['no', 'aluminium', 'steel', 'plastics', 'electrical components', 'glass', 'composite materials'],
+            additionalMaterials: ['no', 'screws', 'adhesives', 'seals', 'lubricants'],
+            energyTypes: [
+                {name: 'Fossil', factor: 1000},
+                {name: 'Nuclear', factor: 5},
+                {name: 'Renewable', factor: 0}
+            ]
         };
+
+        function getEnergyFactors() {
+            const factors = {};
+            customOptions.energyTypes.forEach(type => {
+                factors[type.name] = type.factor;
+            });
+            return factors;
+        }
 
         function createDefaultSubItems(parentItem) {
             const subList = document.createElement('ul');
@@ -557,6 +598,7 @@
                     const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${item.dataset.projectId}`;
                 
                     if (projectData.has(dataKey)) {
+                        showTotalEmissions(item, level);
                         showCurrentEmission(projectData.get(dataKey));
                     } else {
                         document.getElementById('output-section').innerHTML = '';
@@ -568,84 +610,152 @@
             }
         });
 
-        function showInputForm(item) {
-            const parentNameElement = item.parentElement.parentElement.querySelector('.project-name');
-            const parentName = parentNameElement ? parentNameElement.textContent.toLowerCase() : '';
-            const inputSection = document.getElementById('input-section');
-            inputSection.innerHTML = '';
-        
-            const commonInputs = `
-                <div class="input-group">
-                    <label>Energy Type:</label>
-                    <select id="energy-type">
-                        <option value="Fossil">Fossil (⌀ 1.000 g CO2/kWh)</option>
-                        <option value="Nuclear">Nuclear (˂5 g CO2/kWh)</option>
-                        <option value="Renewable">Renewable (close to 0 g CO2/kWh)</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Energy (kWh):</label>
-                    <input type="number" id="energy-input" step="0.1">
-                    <div class="error" id="energy-error"></div>
-                </div>
-            `;
+        function setupDisableQuantityOnNoSelection() {
+            const pairs = [
+                { selectId: 'materials', inputId: 'materials-quantity' },
+                { selectId: 'raw-materials', inputId: 'raw-materials-quantity' },
+                { selectId: 'additional-materials', inputId: 'additional-materials-quantity' }
+            ];
+
+            pairs.forEach(({ selectId, inputId }) => {
+                const selectEl = document.getElementById(selectId);
+                const inputEl = document.getElementById(inputId);
             
-            let specificInputs = '';
-            if (parentName.includes('welding')) {
-                specificInputs = `
-                    <div class="input-group">
-                        <label>Materials:</label>
-                        <select id="materials"></select>
-                        <div class="custom-input-container">
-                            <input type="text" class="custom-input" id="new-material" placeholder="Add new material">
-                            <button class="add-custom-btn" onclick="addCustomOption('materials')">+</button>
-                        </div>
+                if (selectEl && inputEl) {
+                    const updateInputState = () => {
+                        if (selectEl.value === 'no') {
+                            inputEl.disabled = true;
+                            inputEl.value = '';
+                            inputEl.style.borderColor = "#98FB98";
+                            const errEl = document.getElementById(`${inputId}-error`);
+                            if (errEl) errEl.textContent = '';
+                        } else {
+                            inputEl.disabled = false;
+                        }
+                    };
+                
+                    updateInputState();
+                    selectEl.addEventListener('change', updateInputState);
+                }
+            });
+        }
+
+
+    function showInputForm(item) {
+        const parentNameElement = item.parentElement.parentElement.querySelector('.project-name');
+        const parentName = parentNameElement ? parentNameElement.textContent.toLowerCase() : '';
+        const inputSection = document.getElementById('input-section');
+        inputSection.innerHTML = '';
+
+        const energyTypeGroup = document.createElement('div');
+        energyTypeGroup.className = 'input-group';
+        energyTypeGroup.innerHTML = '<label>Energy Type:</label>';
+
+        const energyTypeSelect = document.createElement('select');
+        energyTypeSelect.id = 'energy-type';
+        customOptions.energyTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type.name;
+            option.textContent = `${type.name} (${type.factor} g CO2/kWh)`;
+            energyTypeSelect.appendChild(option);
+        });
+        energyTypeGroup.appendChild(energyTypeSelect);
+
+        energyTypeGroup.innerHTML += `
+            <div style="margin-top: 5px;">
+                <div class="custom-input-container">
+                    <input type="text" class="custom-input" id="new-energy-type" placeholder="Energy type name">
+                    <input type="number" class="custom-input" id="new-energy-factor" placeholder="Factor (g CO2/kWh)" step="0.1">
+                    <button class="add-custom-btn" onclick="addCustomEnergyType()">+</button>
+                </div>
+                <div class="error" id="energy-factor-error" style="margin-top: 5px;"></div>
+            </div>
+        `;
+        
+        const energyInputGroup = document.createElement('div');
+        energyInputGroup.className = 'input-group';
+        energyInputGroup.innerHTML = `
+            <label>Energy (kWh):</label>
+            <input type="number" id="energy-input" step="0.1">
+            <div class="error" id="energy-error"></div>
+        `;
+
+        inputSection.appendChild(energyTypeGroup);
+        inputSection.appendChild(energyInputGroup);
+
+        let specificInputs = '';
+        if (parentName.includes('welding')) {
+            specificInputs = `
+                <div class="input-group">
+                    <label>Materials:</label>
+                    <select id="materials"></select>
+                    <div class="custom-input-container">
+                        <input type="text" class="custom-input" id="new-material" placeholder="Add new material">
+                        <button class="add-custom-btn" onclick="addCustomOption('materials')">+</button>
                     </div>
                     <div class="input-group">
-                        <label>Raw Materials:</label>
-                        <select id="raw-materials"></select>
-                        <div class="custom-input-container">
-                            <input type="text" class="custom-input" id="new-raw-material" placeholder="Add new raw material">
-                            <button class="add-custom-btn" onclick="addCustomOption('rawMaterials')">+</button>
-                        </div>
-                    </div>`;
-            } 
-            else if (parentName.includes('door')) {
-                specificInputs = `
-                    <div class="input-group">
-                        <label>Raw Materials/Body Parts:</label>
-                        <select id="raw-materials"></select>
-                        <div class="custom-input-container">
-                            <input type="text" class="custom-input" id="new-raw-material" placeholder="Add new raw material">
-                            <button class="add-custom-btn" onclick="addCustomOption('rawMaterials')">+</button>
-                        </div>
+                        <label>Materials Quantity:</label>
+                        <input type="number" id="materials-quantity" step="0.1">
+                        <div class="error" id="materials-quantity-error"></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Raw Materials:</label>
+                    <select id="raw-materials"></select>
+                    <div class="custom-input-container">
+                        <input type="text" class="custom-input" id="new-raw-material" placeholder="Add new raw material">
+                        <button class="add-custom-btn" onclick="addCustomOption('rawMaterials')">+</button>
                     </div>
                     <div class="input-group">
-                        <label>Additional Materials:</label>
-                        <select id="additional-materials"></select>
-                        <div class="custom-input-container">
-                            <input type="text" class="custom-input" id="new-additional-material" placeholder="Add new additional material">
-                            <button class="add-custom-btn" onclick="addCustomOption('additionalMaterials')">+</button>
-                        </div>
-                    </div>`;
-            }
-        
-            inputSection.innerHTML = `
-                ${commonInputs}
-                ${specificInputs}
-                <button id="calculate-btn" style="margin-top: 15px;">Calculate</button>
-                <button id="next-btn" style="margin-left: 10px;">Next</button>
-            `;
-            
-            // 填充下拉菜单选项
+                        <label>Raw Materials Quantity:</label>
+                        <input type="number" id="raw-materials-quantity" step="0.1">
+                        <div class="error" id="raw-materials-quantity-error"></div>
+                    </div>
+                </div>`;
+        } 
+        else if (parentName.includes('door')) {
+            specificInputs = `
+                <div class="input-group">
+                    <label>Raw Materials/Body Parts:</label>
+                    <select id="raw-materials"></select>
+                    <div class="custom-input-container">
+                        <input type="text" class="custom-input" id="new-raw-material" placeholder="Add new raw material">
+                        <button class="add-custom-btn" onclick="addCustomOption('rawMaterials')">+</button>
+                    </div>
+                    <div class="input-group">
+                        <label>Raw Materials/Body Parts Quantity:</label>
+                        <input type="number" id="raw-materials-quantity" step="0.1">
+                        <div class="error" id="raw-materials-quantity-error"></div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Additional Materials:</label>
+                    <select id="additional-materials"></select>
+                    <div class="custom-input-container">
+                        <input type="text" class="custom-input" id="new-additional-material" placeholder="Add new additional material">
+                        <button class="add-custom-btn" onclick="addCustomOption('additionalMaterials')">+</button>
+                    </div>
+                    <div class="input-group">
+                        <label>Additional Materials Quantity:</label>
+                        <input type="number" id="additional-materials-quantity" step="0.1">
+                        <div class="error" id="additional-materials-quantity-error"></div>
+                    </div>
+                </div>`;
+        }
+
+        inputSection.innerHTML += specificInputs + `
+            <button id="calculate-btn" style="margin-top: 15px;">Calculate</button>
+            <button id="next-btn" style="margin-left: 10px;">Next</button>
+        `;
+
             if (parentName.includes('welding')) {
                 const materialsSelect = document.getElementById('materials');
                 const rawMaterialsSelect = document.getElementById('raw-materials');
-                
+
                 customOptions.materials.forEach(option => {
                     materialsSelect.add(new Option(option, option));
                 });
-                
+
                 customOptions.rawMaterials.forEach(option => {
                     rawMaterialsSelect.add(new Option(option, option));
                 });
@@ -653,27 +763,36 @@
             else if (parentName.includes('door')) {
                 const rawMaterialsSelect = document.getElementById('raw-materials');
                 const additionalMaterialsSelect = document.getElementById('additional-materials');
-                
+
                 customOptions.rawMaterials.forEach(option => {
                     rawMaterialsSelect.add(new Option(option, option));
                 });
-                
+
                 customOptions.additionalMaterials.forEach(option => {
                     additionalMaterialsSelect.add(new Option(option, option));
                 });
             }
-        
+
             setupInputValidation();
             const parentProject = item.parentElement.parentElement.parentElement;
             const parentProcess = item.parentElement.parentElement;
             const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${item.dataset.projectId}`;
-
+        
             if (projectData.has(dataKey)) {
                 const savedData = projectData.get(dataKey);
-
-                // 填充输入框和下拉菜单的值
+            
                 document.getElementById('energy-type').value = savedData.energyType;
                 document.getElementById('energy-input').value = savedData.energy;
+
+                if (savedData.materialsQuantity) {
+                    document.getElementById('materials-quantity').value = savedData.materialsQuantity;
+                }
+                if (savedData.rawMaterialsQuantity) {
+                    document.getElementById('raw-materials-quantity').value = savedData.rawMaterialsQuantity;
+                }
+                if (savedData.additionalMaterialsQuantity) {
+                    document.getElementById('additional-materials-quantity').value = savedData.additionalMaterialsQuantity;
+                }
             
                 const materialsElement = document.getElementById('materials');
                 const additionalMaterialsElement = document.getElementById('additional-materials');
@@ -689,15 +808,70 @@
             } else {
                 document.getElementById('energy-type').value = 'Fossil';
                 document.getElementById('energy-input').value = '';
-
+            
                 const materialsElement = document.getElementById('materials');
                 const additionalMaterialsElement = document.getElementById('additional-materials');
-                if (materialsElement) materialsElement.value = customOptions.materials[0]; // 默认值
-                if (additionalMaterialsElement) additionalMaterialsElement.value = customOptions.additionalMaterials[0]; // 默认值
+                if (materialsElement) materialsElement.value = customOptions.materials[0];
+                if (additionalMaterialsElement) additionalMaterialsElement.value = customOptions.additionalMaterials[0];
             }
+
+            setupDisableQuantityOnNoSelection();
+
         }
 
-        // 添加自定义选项的函数
+        function addCustomEnergyType() {
+            const nameInput = document.getElementById('new-energy-type');
+            const factorInput = document.getElementById('new-energy-factor');
+            const errorElement = document.getElementById('energy-factor-error');
+
+            const name = nameInput.value.trim();
+            const factor = parseFloat(factorInput.value);
+
+            nameInput.style.borderColor = "";
+            factorInput.style.borderColor = "";
+            errorElement.textContent = "";
+
+            if (!name) {
+                errorElement.textContent = "Please enter an energy type name";
+                nameInput.style.borderColor = "red";
+                return;
+            }
+
+            if (isNaN(factor)) {
+                errorElement.textContent = "Please enter a valid number for the energy factor";
+                factorInput.style.borderColor = "red";
+                return;
+            }
+
+            if (factor < 0) {
+                errorElement.textContent = "Please enter a non-negative number for the energy factor";
+                factorInput.style.borderColor = "red";
+                return;
+            }
+
+            const exists = customOptions.energyTypes.some(type => type.name === name);
+            if (exists) {
+                errorElement.textContent = "This energy type already exists";
+                nameInput.style.borderColor = "red";
+                return;
+            }
+
+            customOptions.energyTypes.push({name, factor});
+
+            const select = document.getElementById('energy-type');
+            select.innerHTML = '';
+            customOptions.energyTypes.forEach(type => {
+                const option = new Option(`${type.name} (${type.factor} g CO2/kWh)`, type.name);
+                select.add(option);
+            });
+            select.value = name;
+
+            nameInput.value = '';
+            factorInput.value = '';
+
+            errorElement.textContent = "";
+        }
+
         function addCustomOption(type) {
             let inputId, selectId;
             
@@ -733,58 +907,113 @@
         }
 
         function setupInputValidation() {
-            const energyInput = document.getElementById('energy-input');
-            const errorDiv = document.getElementById('energy-error');
 
-            const validate = () => {
+            const energyInput = document.getElementById('energy-input');
+            const energyError = document.getElementById('energy-error');
+
+            const validateEnergy = () => {
                 const value = parseFloat(energyInput.value);
                 if (value < 0 || isNaN(value)) {
-                    errorDiv.textContent = "Please enter a non-negative number";
+                    energyError.textContent = "Please enter a non-negative number";
                     energyInput.style.borderColor = "red";
+                    return false;
                 } else {
-                    errorDiv.textContent = "";
+                    energyError.textContent = "";
                     energyInput.style.borderColor = "";
+                    return true;
                 }
-            energyInput.addEventListener('input', validate);
-            energyInput.addEventListener('change', validate);   
-        };
-        energyInput.addEventListener('input', validate);
-        energyInput.addEventListener('change', validate);
+            };
+        
+            const validateMaterialInput = (inputId, errorId) => {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
 
-        document.addEventListener('click', function(e) {
-            if (e.target.id === 'calculate-btn') {
-                calculateEmissions();
-            }
-        });
+                if (!input || !error) return true;
+
+                if (input.disabled) {
+                    error.textContent = "";
+                    input.style.borderColor = "";
+                    return true;
+                }
+
+                const value = parseFloat(input.value);
+                if (value < 0 || isNaN(value)) {
+                    error.textContent = "Please enter a non-negative number";
+                    input.style.borderColor = "red";
+                    return false;
+                } else {
+                    error.textContent = "";
+                    input.style.borderColor = "";
+                    return true;
+                }
+            };
+        
+            energyInput.addEventListener('input', validateEnergy);
+            energyInput.addEventListener('change', validateEnergy);
+        
+            document.addEventListener('input', function(e) {
+                if (e.target.id === 'materials-quantity') {
+                    validateMaterialInput('materials-quantity', 'materials-quantity-error');
+                }
+                if (e.target.id === 'raw-materials-quantity') {
+                    validateMaterialInput('raw-materials-quantity', 'raw-materials-quantity-error');
+                }
+                if (e.target.id === 'additional-materials-quantity') {
+                    validateMaterialInput('additional-materials-quantity', 'additional-materials-quantity-error');
+                }
+            });
+        
+            document.addEventListener('click', function(e) {
+                if (e.target.id === 'calculate-btn') {
+                    const isValidEnergy = validateEnergy();
+                    const isValidMaterials = validateMaterialInput('materials-quantity', 'materials-quantity-error');
+                    const isValidRawMaterials = validateMaterialInput('raw-materials-quantity', 'raw-materials-quantity-error');
+                    const isValidAdditionalMaterials = validateMaterialInput('additional-materials-quantity', 'additional-materials-quantity-error');
+
+                    if (isValidEnergy && isValidMaterials && isValidRawMaterials && isValidAdditionalMaterials) {
+                        calculateEmissions();
+                    }
+                }
+            });
         }
 
         function calculateEmissions() {
             const energyType = document.getElementById('energy-type').value;
             const energy = parseFloat(document.getElementById('energy-input').value);
-                
+
             const parentProject = currentSubSubItem.parentElement.parentElement.parentElement;
             const parentProcess = currentSubSubItem.parentElement.parentElement;
             const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${currentSubSubItem.dataset.projectId}`;
-                
+            const energyFactor = customOptions.energyTypes.find(type => type.name === energyType)?.factor || 0;
+    
             const emissionData = {
                 energyType,
                 energy,
-                CO2: energy * ENERGY_FACTORS[energyType],
+                CO2: energy * energyFactor,
                 timestamp: new Date().toISOString()
             };
+
+            const materialsQuantity = parseFloat(document.getElementById('materials-quantity')?.value);
+            const rawMaterialsQuantity = parseFloat(document.getElementById('raw-materials-quantity')?.value);
+            const additionalMaterialsQuantity = parseFloat(document.getElementById('additional-materials-quantity')?.value);
+
+            if (!isNaN(materialsQuantity)) emissionData.materialsQuantity = materialsQuantity;
+            if (!isNaN(rawMaterialsQuantity)) emissionData.rawMaterialsQuantity = rawMaterialsQuantity;
+            if (!isNaN(additionalMaterialsQuantity)) emissionData.additionalMaterialsQuantity = additionalMaterialsQuantity;
+        
             const materialsElement = document.getElementById('materials');
             const additionalMaterialsElement = document.getElementById('additional-materials');
-
-            if(materialsElement) {
+        
+            if (materialsElement) {
                 emissionData.materials = materialsElement.value;
                 emissionData.shieldingGas = energy * 0.2;
                 emissionData.weldingFume = energy * 0.1;
             }
-
-            if(additionalMaterialsElement) {
+        
+            if (additionalMaterialsElement) {
                 emissionData.additionalMaterials = additionalMaterialsElement.value;
             }
-
+        
             projectData.set(dataKey, emissionData);
             showCurrentEmission(emissionData);
             updateParentEmissions();
@@ -816,20 +1045,15 @@
             inputSection.innerHTML = '';
                 
             const total = calculateTotalEmissions(item);
-            const childrenData = getChildrenData(item);
-                
-            // 初始化 html 变量
-            let html = '';
                 
             let title = '';
             if (level === 0) {
                 title = 'Total project emissions';
             } else if (level === 1) {
-                title = 'Total emissions from produktion process';
+                title = 'Total emissions from production process';
             }
             
-            // 构建基础HTML内容
-            html = `
+            let html = `
                 <h3>${title}</h3>
                 <div class="total-emission">
                     <p>Total CO₂ emissions: <strong>${total.CO2.toFixed(2)} g</strong></p>
@@ -839,37 +1063,62 @@
                 </div>
             `;
             
-            const filteredData = {
-                labels: [],
-                CO2: [],
-                shieldingGas: [],
-                weldingFume: []
-            };
-        
-            childrenData.labels.forEach((label, index) => {
-                if (childrenData.CO2[index] > 0 || 
-                    childrenData.shieldingGas[index] > 0 || 
-                    childrenData.weldingFume[index] > 0) {
-                    filteredData.labels.push(label);
-                    filteredData.CO2.push(childrenData.CO2[index]);
-                    filteredData.shieldingGas.push(childrenData.shieldingGas[index]);
-                    filteredData.weldingFume.push(childrenData.weldingFume[index]);
+            if (total.CO2 > 0 || total.shieldingGas > 0 || total.weldingFume > 0) {
+                const childrenData = getChildrenData(item, level);
+                
+                const filteredData = {
+                    labels: [],
+                    CO2: [],
+                    shieldingGas: [],
+                    weldingFume: []
+                };
+                
+                childrenData.labels.forEach((label, index) => {
+                    if (childrenData.CO2[index] > 0 || 
+                        childrenData.shieldingGas[index] > 0 || 
+                        childrenData.weldingFume[index] > 0) {
+                        filteredData.labels.push(label);
+                        filteredData.CO2.push(childrenData.CO2[index]);
+                        filteredData.shieldingGas.push(childrenData.shieldingGas[index]);
+                        filteredData.weldingFume.push(childrenData.weldingFume[index]);
+                    }
+                });
+                
+                if (filteredData.labels.length > 0) {
+                    html += createChartsHTML(filteredData, level);
                 }
-            });
-        
-            // 仅当有数据时显示图表
-            if (filteredData.labels.length > 0) {
-                html += createChartsHTML(filteredData, level);
+
             }
         
             outputSection.innerHTML = html;
         
-            if (filteredData.labels.length > 0) {
-                renderCharts(filteredData, level);
+            if (total.CO2 > 0 || total.shieldingGas > 0 || total.weldingFume > 0) {
+                const childrenData = getChildrenData(item, level);
+                const filteredData = {
+                    labels: [],
+                    CO2: [],
+                    shieldingGas: [],
+                    weldingFume: []
+                };
+                
+                childrenData.labels.forEach((label, index) => {
+                    if (childrenData.CO2[index] > 0 || 
+                        childrenData.shieldingGas[index] > 0 || 
+                        childrenData.weldingFume[index] > 0) {
+                        filteredData.labels.push(label);
+                        filteredData.CO2.push(childrenData.CO2[index]);
+                        filteredData.shieldingGas.push(childrenData.shieldingGas[index]);
+                        filteredData.weldingFume.push(childrenData.weldingFume[index]);
+                    }
+                });
+                
+                if (filteredData.labels.length > 0) {
+                    renderCharts(filteredData, level);
+                }
             }
         }
-
-        function getChildrenData(item) {
+        
+        function getChildrenData(item, level) {
             const data = {
                 labels: [],
                 CO2: [],
@@ -880,12 +1129,18 @@
             const subList = item.querySelector('.sub-list');
             if (subList) {
                 subList.querySelectorAll('.project-item').forEach(child => {
-                    // 仅处理直接子项目（排除子子项目）
-                    if (child.parentElement === subList) {
+ 
+                    if (level === 0) {
+                        const childTotal = calculateTotalEmissions(child);
+                        data.labels.push(child.querySelector('.project-name').textContent);
+                        data.CO2.push(childTotal.CO2 || 0);
+                        data.shieldingGas.push(childTotal.shieldingGas || 0);
+                        data.weldingFume.push(childTotal.weldingFume || 0);
+                    } else if (level === 1) {
                         const parentProject = child.parentElement.parentElement.parentElement;
                         const parentProcess = child.parentElement.parentElement;
                         const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${child.dataset.projectId}`;
-                    
+                        
                         if (projectData.has(dataKey)) {
                             const childData = projectData.get(dataKey);
                             data.labels.push(child.querySelector('.project-name').textContent);
@@ -898,7 +1153,37 @@
             }
             return data;
         }
-
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.project-item')) {
+                const item = e.target.closest('.project-item');
+                const level = getNestingLevel(item);
+            
+                document.querySelectorAll('.project-item').forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                document.getElementById('selected-project').textContent = item.querySelector('.project-name').textContent;
+            
+                if (level === 2) {
+                    currentSubSubItem = item;
+                    showInputForm(item);
+                
+                    const parentProject = item.parentElement.parentElement.parentElement;
+                    const parentProcess = item.parentElement.parentElement;
+                
+                    const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${item.dataset.projectId}`;
+                
+                    if (projectData.has(dataKey)) {
+                        showCurrentEmission(projectData.get(dataKey));
+                    } else {
+                        document.getElementById('output-section').innerHTML = '';
+                    }
+                } else {
+                    currentSubSubItem = null;
+                    showTotalEmissions(item, level);
+                }
+            }
+        });
+        
         function createChartsHTML(childrenData, level) {
             return `
                 <div class="chart-container">
@@ -911,6 +1196,9 @@
                         <canvas id="barChart"></canvas>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="generate-report-btn">Download ISO 14040 Report (PDF)</button>
+                </div>
             `;
         }
 
@@ -922,12 +1210,10 @@
                 window.barChart.destroy();
             }
         
-            // 确保canvas元素存在
             const pieCanvas = document.getElementById('pieChart');
             const barCanvas = document.getElementById('barChart');
             if (!pieCanvas || !barCanvas) return;
         
-            // 清除可能存在的旧上下文
             pieCanvas.width = pieCanvas.offsetWidth;
             pieCanvas.height = pieCanvas.offsetHeight;
             barCanvas.width = barCanvas.offsetWidth;
@@ -1072,6 +1358,9 @@
 
             // Handle click on total emissions display
             if (e.target.closest('#total-emissions-display')) {
+                document.getElementById('input-section').innerHTML = '';
+                document.getElementById('selected-project').textContent = '';
+
                 const mainList = document.getElementById('main-list');
                 const projectsData = {
                     labels: [],
@@ -1090,7 +1379,7 @@
             
                 const outputSection = document.getElementById('output-section');
                 let html = `
-                    <h3>Total emissions from all projects</h3>
+                    <h3 style="text-align: center; font-weight: bold;">Total emissions from all projects</h3>
                     <div class="total-emission">
                         <p>Total CO₂ emissions: <strong>${calculateAllProjectsTotal().toFixed(2)} g</strong></p>
                     </div>
@@ -1106,17 +1395,204 @@
                     renderCharts(projectsData, 0);
                 }
             }
-        });
-        
 
+            if (e.target.id === 'generate-report-btn') {
+                const currentItem = document.querySelector('.project-item.selected');
+                if (!currentItem) return;
+
+                const level = getNestingLevel(currentItem);
+                generateReport(currentItem, level);
+            }
+
+            function generateReport(item, level) {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                doc.setFontSize(16);
+                doc.text("ISO 14040 Life Cycle Assessment Report", 10, 20);
+                doc.setFontSize(12);
+                doc.text(`Generated: ${new Date().toLocaleString()}`, 10, 30);
+
+                let y = 40;
+
+                switch(level) {
+                    case 0:
+                        generateProjectReport(doc, item, y);
+                        break;
+                    case 1:
+                        generateProcessReport(doc, item, y);
+                        break;
+                    case 2:
+                        generateStepReport(doc, item, y);
+                        break;
+                }
+
+                doc.save("ISO14040_LCA_Report.pdf");
+
+            }
+        });
+            
+        function generateProjectReport(doc, project, startY) {
+            let y = startY;
+            const projectName = project.querySelector('.project-name').textContent;
+            const total = calculateTotalEmissions(project);
+
+            doc.setFont(undefined, 'bold');
+            doc.text(`Project: ${projectName}`, 10, y);
+            y += 8;
+
+            doc.setFont(undefined, 'normal');
+            doc.text(`Total CO2 Emissions: ${total.CO2.toFixed(2)} g`, 15, y);
+            y += 10;
+
+            const subList = project.querySelector('.sub-list');
+            if (subList) {
+                subList.querySelectorAll('.project-item').forEach(process => {
+                    const processName = process.querySelector('.project-name').textContent;
+                    const processTotal = calculateTotalEmissions(process);
+
+                    doc.setFont(undefined, 'bold');
+                    doc.text(`Production Process: ${processName}`, 15, y);
+                    y += 8;
+
+                    doc.setFont(undefined, 'normal');
+                    doc.text(`Total CO2: ${processTotal.CO2.toFixed(2)} g`, 20, y);
+                    y += 8;
+
+                    const subSubList = process.querySelector('.sub-list');
+                    if (subSubList) {
+                        subSubList.querySelectorAll('.project-item').forEach(step => {
+                            const stepData = getStepData(step);
+                            if (stepData) {
+                                doc.text(`- ${step.querySelector('.project-name').textContent}: ${stepData.CO2.toFixed(2)} g`, 25, y);
+                                y += 6;
+
+                                if (stepData.shieldingGas) {
+                                    doc.text(`  Shielding Gas: ${stepData.shieldingGas.toFixed(2)} g`, 30, y);
+                                    y += 6;
+                                }
+                                if (stepData.weldingFume) {
+                                    doc.text(`  Welding Fume: ${stepData.weldingFume.toFixed(2)} g`, 30, y);
+                                    y += 6;
+                                }
+                            }
+                        });
+                    }
+
+                    y += 10;
+                    if (y > 270) {
+                        doc.addPage();
+                        y = 20;
+                    }
+                });
+            }
+
+            return y;
+        }
+
+        function generateProcessReport(doc, process, startY) {
+            let y = startY;
+            const processName = process.querySelector('.project-name').textContent;
+            const processTotal = calculateTotalEmissions(process);
+
+            doc.setFont(undefined, 'bold');
+            doc.text(`Production Process: ${processName}`, 10, y);
+            y += 8;
+
+            doc.setFont(undefined, 'normal');
+            doc.text(`Total CO2 Emissions: ${processTotal.CO2.toFixed(2)} g`, 15, y);
+            y += 10;
+
+            const subList = process.querySelector('.sub-list');
+            if (subList) {
+                subList.querySelectorAll('.project-item').forEach(step => {
+                    const stepData = getStepData(step);
+                    if (stepData) {
+                        doc.setFont(undefined, 'bold');
+                        doc.text(`Step: ${step.querySelector('.project-name').textContent}`, 15, y);
+                        y += 8;
+
+                        doc.setFont(undefined, 'normal');
+                        doc.text(`CO₂: ${stepData.CO2.toFixed(2)} g`, 20, y);
+                        y += 6;
+
+                        if (stepData.shieldingGas) {
+                            doc.text(`Shielding Gas: ${stepData.shieldingGas.toFixed(2)} g`, 20, y);
+                            y += 6;
+                        }
+                        if (stepData.weldingFume) {
+                            doc.text(`Welding Fume: ${stepData.weldingFume.toFixed(2)} g`, 20, y);
+                            y += 6;
+                        }
+
+                        y += 8;
+                        if (y > 270) {
+                            doc.addPage();
+                            y = 20;
+                        }
+                    }
+                });
+            }
+
+            return y;
+        }
+
+        function generateStepReport(doc, step, startY) {
+            let y = startY;
+            const stepName = step.querySelector('.project-name').textContent;
+            const stepData = getStepData(step);
+
+            if (!stepData) return y;
+
+            doc.setFont(undefined, 'bold');
+            doc.text(`Production Step: ${stepName}`, 10, y);
+            y += 10;
+
+            doc.setFont(undefined, 'normal');
+            doc.text(`CO2 Emissions: ${stepData.CO2.toFixed(2)} g`, 15, y);
+            y += 8;
+
+            if (stepData.shieldingGas) {
+                doc.text(`Shielding Gas: ${stepData.shieldingGas.toFixed(2)} g`, 15, y);
+                y += 8;
+            }
+            if (stepData.weldingFume) {
+                doc.text(`Welding Fume: ${stepData.weldingFume.toFixed(2)} g`, 15, y);
+                y += 8;
+            }
+
+            doc.text(`Energy Type: ${stepData.energyType}`, 15, y);
+            y += 8;
+            doc.text(`Energy Used: ${stepData.energy} kWh`, 15, y);
+            y += 8;
+
+            if (stepData.materials) {
+                doc.text(`Materials: ${stepData.materials}`, 15, y);
+                y += 8;
+            }
+            if (stepData.additionalMaterials) {
+                doc.text(`Additional Materials: ${stepData.additionalMaterials}`, 15, y);
+                y += 8;
+            }
+
+            return y;
+        }
+
+        function getStepData(step) {
+            const parentProject = step.parentElement.parentElement.parentElement;
+            const parentProcess = step.parentElement.parentElement;
+            const dataKey = `${parentProject.dataset.projectId}-${parentProcess.dataset.projectId}-${step.dataset.projectId}`;
+            return projectData.get(dataKey);
+        }
+            
         function calculateAllProjectsTotal() {
             let total = 0;
             const mainList = document.getElementById('main-list');
-
+        
             mainList.querySelectorAll('.project-item').forEach(project => {
                 total += calculateTotalEmissions(project).CO2;
             });
-
+                
             return total / 2;
         }
 
@@ -1127,5 +1603,3 @@
     </script>
 </body>
 </html>
-
-{% endblock %}

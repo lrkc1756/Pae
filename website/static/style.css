@@ -88,7 +88,7 @@
   background-color: 		#ecf4e9;
 }
 
-.medium-gray{
+.light-gray{
   background-color: #edf2f7;
 }
 
@@ -106,4 +106,37 @@
 
 .medium-gray-text {
   color: #7a7f85;
+}
+
+/*DEFAULT TEXT COLOR*/ 
+body{
+  color: #1a1a1a;
+}
+
+.full-width-bg{
+  width: 100%;
+  padding: 40px 40px; 
+}
+
+/*HEADERS*/
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1rem;
+}
+h6 {
+  font-size: 0.875rem;
 }
