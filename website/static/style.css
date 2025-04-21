@@ -3,6 +3,8 @@
     background-color: #003399;
     position: relative;
     z-index: 1000;
+    margin-left: calc(-50vw + 50%);
+    padding-left: 50px;
   }
   
 /* Custom Navbar Text */
@@ -114,8 +116,9 @@ body{
 }
 
 .full-width-bg{
-  width: 100%;
-  padding: 40px 40px; 
+  width: 100vw; /*force full viewport width*/
+  padding: 50px 50px; 
+  margin-left: calc(-50vw + 50%); /*center correctly*/ 
 }
 
 /*HEADERS*/
