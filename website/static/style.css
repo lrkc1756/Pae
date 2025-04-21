@@ -121,25 +121,45 @@ body{
   margin-left: calc(-50vw + 50%); /*center correctly*/ 
 }
 
+.container{
+  padding-left: 0px;
+  padding-right: 0px;
+  max-width: 100%; /* Prevent centering like .container does */
+}
+
+
 /*HEADERS*/
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
+  text-align: left; 
 }
 h2 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 600; 
+  text-align: left; 
 }
 h3 {
   font-size: 1.5rem;
   font-weight: 600;
+  text-align: left; 
 }
 h4 {
   font-size: 1.25rem;
+  text-align: left; 
 }
 h5 {
   font-size: 1rem;
+  text-align: left; 
 }
 h6 {
   font-size: 0.875rem;
+  text-align: left; 
+}
+
+
+
+.container {
+  padding-left: 0px;
+  padding-right: 0px;
 }
