@@ -8,8 +8,8 @@
 </br> 
     <div class="row">
         {% for person in people %}
-        <div class="col-md-6 mb-4 contact-card">
-            <div class="card text-left green-border-card" style="width: 100%; min-width: 180px; height: 450px;">
+        <div class="col-md-6 mb-4 d-flex contact-card">
+            <div class="card text-left green-border-card" style="width: 100%; min-width: 180px; min-height: 450px;">
                 <img src="{{ url_for('static', filename=person.image) }}" class="card-img-top" alt="{{ person.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ person.name }}</h5>
