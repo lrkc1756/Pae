@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{lang}}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,8 @@
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
+    {% set lang = request.args.get('lang', 'de') %}
+
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
       <button
         class="navbar-toggler"

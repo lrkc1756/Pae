@@ -2,7 +2,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-from flask_babel import Babel
+from flask_babel import Babel, _
+from flask import request
+
 
 db = SQLAlchemy()
 babel = Babel()  #translations
@@ -20,13 +22,15 @@ def create_app():
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
     
     db.init_app(app)
-    babel.init_app(app)
     
     #Language selection from URL query (z.B. ?lang=de)
     def get_locale():
-        return request.args.get('lang') or request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+        return request.args.get('lang') or 'de'
 
     babel.init_app(app, locale_selector=get_locale)
+    
+    # After you create app:
+    app.jinja_env.globals.update(_=_) #allows translation in Jinja templates
 
 
     from .views import views

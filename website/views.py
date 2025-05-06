@@ -3,14 +3,18 @@ from flask_login import login_required, current_user
 from .models import User, Lca
 from . import db
 import json
+from flask_babel import _
+from flask_babel import get_locale
+
 
 views = Blueprint('views', __name__)
 
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
+    print("Current language:", get_locale()) 
     demonstrator = [
-        {"name": "LCA", "description": "Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes", "image": "lca.png", "link":url_for('views.lca')},
+        {"name": _("LCA"), "description": _("Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes"), "image": "lca.png", "link":url_for('views.lca')},
         {"name": "Eco Design", "description": "Veranschaulichung Nachhaltigkeit durch intelligentes Design", "image": "eco_design.png"},
         {"name": "Ganzheitliches Energiemanagement", "description": "Veranschaulichung Emissions-reduzierung durch Energie", "image": "ganzheitliches.png"},
         {"name": "Energy Measurement", "description": "Erreichen von hochauflösender Erfassung von Energie- und Stoffströmen", "image": "energy.png"},
