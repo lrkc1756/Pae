@@ -10,7 +10,7 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 def home():
     demonstrator = [
-        {"name": "LCA", "description": "Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes", "image": "lca.png", "link":url_for('views.co2')},
+        {"name": "LCA", "description": "Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes", "image": "lca.png", "link":url_for('views.lca')},
         {"name": "Eco Design", "description": "Veranschaulichung Nachhaltigkeit durch intelligentes Design", "image": "eco_design.png"},
         {"name": "Ganzheitliches Energiemanagement", "description": "Veranschaulichung Emissions-reduzierung durch Energie", "image": "ganzheitliches.png"},
         {"name": "Energy Measurement", "description": "Erreichen von hochauflösender Erfassung von Energie- und Stoffströmen", "image": "energy.png"},
@@ -38,6 +38,6 @@ def demo():
 def about():
     return render_template("about.html", user=current_user)
 
-@views.route('/co2')
-def co2():
-    return render_template("co2.html", user=current_user)
+@views.route('/lca')
+def lca():
+    return render_template("LCA_SPA.html", user=current_user)
