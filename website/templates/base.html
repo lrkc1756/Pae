@@ -32,16 +32,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
-          <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="/">Start</a>
-          <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo') }}">Demo</a>
-          <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about') }}">Über Uns</a>
-          <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact') }}">Kontakt</a>
+          <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="{{ url_for('views.home', lang=lang) }}">Start</a>
+          <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo', lang=lang) }}">Demo</a>
+          <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about', lang=lang) }}">Über Uns</a>
+          <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact', lang=lang) }}">Kontakt</a>
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link {% if request.path == '/logout' %}active{% endif %}" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
+          <a class="nav-item nav-link {% if request.path == '/logout' %}active{% endif %}" id="logout" href="{{ url_for('auth.logout', lang=lang) }}">Logout</a>
           {% else %}
-          <a class="nav-item nav-link {% if request.path == '/login' or request.path == '/sign-up' %}active{% endif %}" id="login" href="{{ url_for('auth.login') }}">Anmelden</a>
+          <a class="nav-item nav-link {% if request.path == '/login' or request.path == '/sign-up' %}active{% endif %}" id="login" href="{{ url_for('auth.login', lang=lang) }}">Anmelden</a>
           {% endif %}
         </div>
+      </div>
+      <div class="ml-auto pr-3 nav-link">
+        <a href="?lang=de">DE</a> |
+        <a href="?lang=en">EN</a> |
+        <a href="?lang=fr">FR</a>
       </div>
     </nav>
 

@@ -2,8 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask_babel import Babel
 
 db = SQLAlchemy()
+babel = Babel()  #translations
 DB_NAME = "database.db"
 
 
@@ -11,7 +13,21 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    
+    #Babel Configuration
+    app.config['BABEL_DEFAULT_LOCALE']='de'
+    app.config['BABEL_SUPPORTED_LOCALES'] = ['de', 'en', 'fr']
+    app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+    
     db.init_app(app)
+    babel.init_app(app)
+    
+    #Language selection from URL query (z.B. ?lang=de)
+    def get_locale():
+        return request.args.get('lang') or request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+
+    babel.init_app(app, locale_selector=get_locale)
+
 
     from .views import views
     from .auth import auth

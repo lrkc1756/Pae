@@ -10,12 +10,12 @@
   
 /* Custom Navbar Text */
 .custom-navbar .nav-link {
-    color: #003399 !important; /* Stone Gray */
+    color: #003399 !important; /* EU Blue */
   }
   
   /* Optional: hover effect */
   .custom-navbar .nav-link:hover {
-    color: #003399 !important; /* White on hover for contrast */
+    color: #003399 !important; /* dark on hover for contrast */
   }
   
 
@@ -37,6 +37,11 @@
 
 /* Style the active nav link */
 .custom-navbar .nav-link.active {
+    color: #003399 !important;  /* Dark gray */
+    font-weight: bold;
+  }
+
+  .nav-link.active {
     color: #003399 !important;  /* Dark gray */
     font-weight: bold;
   }
