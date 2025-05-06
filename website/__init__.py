@@ -1,46 +1,41 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
 from flask_babel import Babel, _
-from flask import request
-
+import os
 
 db = SQLAlchemy()
-babel = Babel()  #translations
+babel = Babel()
 DB_NAME = "database.db"
-
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    
-    #Babel Configuration
-    app.config['BABEL_DEFAULT_LOCALE']='de'
+    app.config['BABEL_DEFAULT_LOCALE'] = 'de'
     app.config['BABEL_SUPPORTED_LOCALES'] = ['de', 'en', 'fr']
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
-    
+
     db.init_app(app)
-    
-    #Language selection from URL query (z.B. ?lang=de)
+
+    # Use the new Babel 4 locale_selector approach
     def get_locale():
-        return request.args.get('lang') or 'de'
+        lang = request.args.get('lang')
+        if lang in app.config['BABEL_SUPPORTED_LOCALES']:
+            return lang
+        return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
 
     babel.init_app(app, locale_selector=get_locale)
-    
-    # After you create app:
-    app.jinja_env.globals.update(_=_) #allows translation in Jinja templates
 
+    app.jinja_env.add_extension('jinja2.ext.i18n')
+    app.jinja_env.globals.update(_=_)
 
     from .views import views
     from .auth import auth
-
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
     from .models import User, Lca
-    
     with app.app_context():
         db.create_all()
 
@@ -53,9 +48,3 @@ def create_app():
         return User.query.get(int(id))
 
     return app
-
-
-def create_database(app):
-    if not path.exists('website/' + DB_NAME):
-        db.create_all(app=app)
-        print('Created Database!')
