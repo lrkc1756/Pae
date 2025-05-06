@@ -45,9 +45,9 @@
   .custom-footer{
     background-color: #454545;
     position: relative;
-    z-index: 1000;
-    margin-left: calc(-50vw + 50%);
     padding-left: 50px;
+    margin-bottom: 0;
+    padding-bottom: 0rem; /* reasonable */
   }
 
 

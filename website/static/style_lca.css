@@ -1,0 +1,471 @@
+/* 全局样式 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #1b5e20;
+}
+
+/* 侧边栏样式 - 宽度增加到320px */
+#sidebar {
+    width: 320px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-right: 1px solid #e0e0e0;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 20px 20px 15px;
+    background: #f1f8e9;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+}
+
+.scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px 20px;
+    background-color: #ffffff;
+}
+
+.sidebar-footer {
+    padding: 15px 20px;
+    background: #f1f8e9;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* 项目列表样式 */
+.project-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.project-item {
+    margin: 10px 0;
+    position: relative;
+}
+
+/* 项目内容容器 - 添加相对定位 */
+.project-content {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-left: 4px solid #81c784;
+    position: relative;
+    background-color: #e8f5e9;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* 按钮容器 - 右对齐 */
+.project-buttons {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+/* 项目名称样式 */
+.project-name {
+    flex-grow: 1;
+    padding-right: 70px;
+    transition: color 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #1b5e20;
+}
+
+.project-name.editable {
+    cursor: text;
+}
+
+/* 子列表样式 */
+.sub-list {
+    padding-left: 24px;
+    display: none;
+    margin-top: 8px;
+}
+
+/* 二级项目样式 */
+.project-item .sub-list .project-item {
+    margin: 8px 0;
+}
+
+.project-item .sub-list .project-content {
+    padding: 10px 12px 10px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    border-left: 3px solid #a5d6a7;
+    background-color: #f1f8e9 !important;
+}
+
+.project-item .sub-list .project-name {
+    color: #2e7d32;
+    padding-right: 60px;
+}
+
+/* 三级项目样式 */
+.project-item .sub-list .sub-list .project-item {
+    margin: 6px 0;
+}
+
+.project-item .sub-list .sub-list .project-content {
+    padding: 8px 10px 8px 25px;
+    font-size: 14px;
+    font-weight: normal;
+    border-left: 2px solid #c8e6c9;
+    background-color: #f8f8f8 !important;
+}
+
+.project-item .sub-list .sub-list .project-name {
+    color: #4c8c4a;
+    padding-right: 50px;
+}
+
+/* 按钮样式 */
+.btn {
+    cursor: pointer;
+    padding: 3px 6px;
+    background-color: #81c784 !important;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-left: 0;
+    min-width: 24px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #66bb6a !important;
+    transform: scale(1.05);
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+
+/* 内容区域样式 */
+#content-area {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 30px;
+    margin-left: 320px;
+    background-color: #ffffff;
+    align-items: center;
+}
+
+#project-header {
+    order: 1;
+    margin-bottom: 25px;
+}
+
+#input-section {
+    order: 2;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#output-section {
+    order: 3;
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 auto 25px;
+    width: 100%;
+}
+
+/* 输入组件样式 */
+.input-group {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #455a64;
+    font-weight: 500;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #81c784;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2);
+}
+
+.error {
+    color: #e53935;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+.total-emission {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.total-emission p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #2e7d32;
+}
+
+.total-emission strong {
+    color: #1b5e20;
+}
+
+#total-emissions-display {
+    border: 1px solid #c8e6c9;
+    text-align: center;
+    cursor: pointer;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+#total-emissions-display h3 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+#all-projects-total {
+    color: #1b5e20;
+    font-size: 1.4em;
+}
+
+/* 自定义输入组件 */
+.custom-input-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.custom-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.add-custom-btn {
+    background: #81c784;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-custom-btn:hover {
+    background: #66bb6a;
+}
+
+/* 图表容器 */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.chart-wrapper {
+    width: 100%;
+    max-width: 450px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+/* 生成报告按钮 */
+#generate-report-btn {
+    margin-top: 20px;
+    background-color: #81c784;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#generate-report-btn:hover {
+    background-color: #66bb6a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 材料部分样式 */
+.material-section {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+.remove-section-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ef5350;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.remove-section-btn:hover {
+    background: #e53935;
+}
+
+/* 编辑输入框 */
+.edit-input {
+    flex-grow: 1;
+    border: 1px solid #bdbdbd;
+    padding: 6px;
+    margin-right: 8px;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 4px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+
+
+.DRV-img, .UCB-img, .PAE-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.DRV-img:hover, .UCB-img:hover, .PAE-img:hover {
+    opacity: 1;
+}
+
+#content-area {
+    padding-bottom: 100px;
+}
+
+.project-item.selected .project-content {
+    background-color: #c8e6c9 !important;
+    box-shadow: 0 0 0 2px #81c784;
+}
+
+/* 响应式设计 
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    #content-area {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .chart-container {
+        flex-direction: column;
+    }
+    
+    .chart-wrapper {
+        max-width: 100%;
+    }
+    
+    .project-buttons {
+        position: static;
+        margin-left: auto;
+    }
+    
+    .project-name {
+        padding-right: 0;
+    }
+}
+*/
+
+/* 悬停效果 */
+.project-content:hover {
+    background-color: #c8e6c9 !important;
+    transform: translateX(3px);
+}
+
+.project-item .sub-list .project-content:hover {
+    transform: translateX(2px);
+}
+
+.project-item .sub-list .sub-list .project-content:hover {
+    transform: translateX(1px);
+}

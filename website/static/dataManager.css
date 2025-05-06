@@ -1,0 +1,372 @@
+.waste-page  {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #4e9f38;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 侧边栏样式 */
+.waste-page #sidebar {
+    width: 320px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-right: 1px solid #e0e0e0;
+    z-index: 1000;
+}
+
+.waste-page .sidebar-header {
+    padding: 20px 20px 15px;
+    background: #f1f8e9;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+}
+
+.waste-page .sidebar-header h2 {
+    margin: 0;
+    color: #1b5e20;
+}
+
+.waste-page .scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px 20px;
+    background-color: #ffffff;
+}
+
+.waste-page .sidebar-item {
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-left: 4px solid #81c784;
+    background-color: #e8f5e9;
+    border-radius: 6px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #1b5e20;
+}
+
+.waste-page .sidebar-item:hover {
+    background-color: #c8e6c9 !important;
+    transform: translateX(3px);
+}
+
+.waste-page .sidebar-item.active {
+    background-color: #c8e6c9 !important;
+    box-shadow: 0 0 0 2px #81c784;
+}
+
+.waste-page .sidebar-footer {
+    padding: 15px 20px;
+    background: #f1f8e9;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* 内容区域样式 */
+.waste-page #content-area {
+    flex: 1;
+    padding: 30px;
+    margin-left: 320px;
+    background-color: #ffffff;
+}
+
+/* 表格样式 */
+.waste-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.waste-page th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: left;
+}
+
+.waste-page th {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    position: sticky;
+    top: 0;
+}
+
+.waste-page tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.waste-page tr:hover {
+    background-color: #e8f5e9;
+}
+
+/* 表单组样式 */
+.waste-page .form-group {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.waste-page label {
+    display: block;
+    margin-bottom: 8px;
+    color: #455a64;
+    font-weight: 500;
+}
+
+.waste-page input, select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.waste-page input:focus, select:focus {
+    border-color: #81c784;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2);
+}
+
+/* 按钮样式 */
+.waste-page button {
+    background-color: #81c784;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.waste-page button:hover {
+    background-color: #66bb6a;
+    transform: translateY(-1px);
+}
+
+.waste-page .action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* 错误消息样式 */
+.waste-page .error {
+    color: #e53935;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+/* 搜索和筛选区域 */
+.waste-page .search-filter {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.waste-page .search-filter input, .search-filter select {
+    flex: 1;
+}
+
+/* 材料详情区域 */
+.waste-page .material-details {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+/* 废弃物类型列表 */
+.waste-page .waste-type-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.waste-page .waste-type-item {
+    padding: 12px 15px;
+    margin: 8px 0;
+    background-color: #e8f5e9;
+    border-left: 4px solid #81c784;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.waste-page .waste-type-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.waste-page .waste-type-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* 编辑模式样式 */
+.waste-page .waste-type-edit {
+    display: none; /* 默认隐藏 */
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.waste-page .waste-type-edit.active {
+    display: flex;
+}
+
+.waste-page .waste-type-edit-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.waste-page .waste-type-edit-input {
+    width: 200px; /* 缩短输入框宽度 */
+    padding: 8px 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+}
+
+.waste-page .waste-type-edit-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+/* 按钮样式 - 统一为绿色 */
+.waste-page .edit-waste-type-btn,
+.waste-page .delete-waste-type-btn,
+.waste-page .save-waste-type-btn {
+    background-color: #81c784;
+}
+
+.waste-page .cancel-waste-type-edit-btn {
+    background-color: #bdbdbd;
+}
+
+.waste-page .edit-waste-type-btn:hover,
+.waste-page .delete-waste-type-btn:hover,
+.waste-page .save-waste-type-btn:hover {
+    background-color: #66bb6a;
+}
+
+.waste-page .cancel-waste-type-edit-btn:hover {
+    background-color: #9e9e9e;
+}
+
+/* 返回按钮样式 */
+.waste-page #back-btn {
+    background-color: #81c784;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.waste-page #back-btn:hover {
+    background-color: #66bb6a;
+}
+
+/* 重置按钮样式 */
+.waste-page #reset-btn {
+    background-color: #ef5350;
+    width: 100%;
+}
+
+.waste-page #reset-btn:hover {
+    background-color: #e53935;
+}
+
+/* 内容区域标题 */
+.waste-page #content-area h2 {
+    color: #1b5e20;
+    margin-top: 0;
+}
+
+.waste-page #content-area p {
+    color: #455a64;
+}
+
+/* Select2 样式调整 */
+.waste-page .select2-container--default .select2-selection--multiple {
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    min-height: 38px;
+}
+
+.waste-page .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #81c784;
+    border: none;
+    color: white;
+}
+
+.waste-page .content-section {
+    display: none;
+}
+
+.waste-page .content-section.active {
+    display: block;
+}
+
+/* SweetAlert2 自定义样式 */
+.waste-page .custom-swal-popup {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.waste-page .custom-swal-confirm-btn {
+    background-color: #ef5350 !important;
+    transition: all 0.2s;
+}
+
+.waste-page .custom-swal-confirm-btn:hover {
+    background-color: #e53935 !important;
+    transform: translateY(-1px);
+}
+
+.waste-page .swal2-title {
+    color: #1b5e20 !important;
+}
+
+.waste-page .swal2-html-container {
+    color: #455a64 !important;
+}
+
+/* SweetAlert2 成功提示样式 */
+.waste-page .swal2-success {
+    color: #1b5e20 !important;
+    border-color: #81c784 !important;
+}
+
+.waste-page .swal2-success [class^='swal2-success-line'] {
+    background-color: #4caf50 !important;
+}
+
+.waste-page .swal2-title.success-title {
+    color: #1b5e20 !important;
+    font-weight: 600;
+}
+
+.waste-page .swal2-confirm.success-btn {
+    background-color: #81c784 !important;
+    transition: all 0.2s;
+}
+
+.waste-page .swal2-confirm.success-btn:hover {
+    background-color: #66bb6a !important;
+    transform: translateY(-1px);
+}

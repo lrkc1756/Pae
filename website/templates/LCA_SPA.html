@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCA Tool SPA</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dataManager.css">
+
+  <script src="wasteData.js"></script>
+</head>
+<body>
+  <nav style="padding: 10px; background: #eee; display: flex; gap: 10px;">
+    <button onclick="showMain()">LCA Tool</button>
+    <button onclick="showDataManager()">Manage Waste Data</button>
+  </nav>
+
+  <div id="main-view" class="co2-page"> <!-- CO2 Project Manager UI -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h2>MyProject</h2>
+        </div>
+        <div class="scrollable-content">
+            <ul class="project-list" id="main-list">
+            <li class="project-item"  id="example-project">
+                <div class="project-content">
+                    <span class="project-name editable">Example Project</span>
+                    <div class="project-buttons">
+                        <button class="btn add-btn">+</button>
+                        <button class="btn delete-btn">×</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+        <div class="sidebar-footer">
+            <div id="total-emissions-display" style="padding: 10px; background: #bfe3bf; margin-bottom: 10px; border-radius: 3px;">
+                <h3 style="margin-top: 0; margin-bottom: 5px;">Total CO₂ Emissions</h3>
+                <div id="all-projects-total" style="font-size: 18px; font-weight: bold;">0.00 g</div>
+            </div>
+            <div class="footer-buttons">
+                <button id="add-main-btn" class="btn">Add project</button>
+                <button id="manage-data-btn" class="btn">Manage Waste Data</button>
+            </div>
+        </div>
+    </div>
+    <div id="content-area" style="margin-left: 300px; padding: 20px;">
+        <div id="project-header" style="margin-bottom: 20px;">
+            <h2 id="selected-project" style="text-align: center;"></h2>
+        </div>
+        <div id="input-section" style="margin-bottom: 20px;"></div>
+        <div id="output-section"></div>
+        <div class="image-container">
+            <img src="PAE-e-green.png" alt="PAE-e-green" class="PAE-img">
+            <img src="DRV.png" alt="DRV" class="DRV-img">
+            <img src="UCB.png" alt="UCB" class="UCB-img">
+        </div>
+    </div>
+  </div>
+
+  <div id="data-manager-view" class="waste-page" style="display: none;"> <!-- Waste Data Manager UI -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h2>Waste Data Manager</h2>
+        </div>
+        <div class="scrollable-content">
+            <div class="sidebar-item active" data-section="energy-types">Energy Types</div>
+            <div class="sidebar-item" data-section="materials">Materials</div>
+            <div class="sidebar-item" data-section="waste-types">Waste Types</div>
+        </div>
+        <div class="sidebar-footer">
+            <button id="back-btn">Back to LCA Tool</button>
+            <button id="reset-btn">Reset All Data</button>
+        </div>
+    </div>
+    
+    <div id="content-area">
+        <!-- Energy Types Section -->
+        <div id="energy-types" class="content-section active">
+            <h2>Energy Types</h2>
+            <p>Manage different energy types and their CO2 emission factors.</p>
+            
+            <div class="search-filter">
+                <input type="text" id="energy-search" placeholder="Search energy types...">
+            </div>
+            
+            <table id="energy-table">
+                <thead>
+                    <tr>
+                        <th>Energy Type</th>
+                        <th>Emission Factor (g CO2/kWh)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+            
+            <div class="material-details">
+                <h3>Add/Edit Energy Type</h3>
+                <div class="form-group">
+                    <label for="energy-name">Energy Type Name:</label>
+                    <input type="text" id="energy-name" placeholder="e.g. Solar">
+                    <div class="error" id="energy-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="energy-factor">Emission Factor (g CO2/kWh):</label>
+                    <input type="number" id="energy-factor" step="0.1" placeholder="e.g. 0 for renewable">
+                    <div class="error" id="energy-factor-error"></div>
+                </div>
+                <div class="action-buttons">
+                    <button id="add-energy-btn">Add Energy Type</button>
+                    <button id="update-energy-btn" style="display: none;">Update Energy Type</button>
+                    <button id="cancel-energy-edit" style="display: none;">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Materials Section -->
+        <div id="materials" class="content-section">
+            <h2>Materials</h2>
+            <p>Manage materials and their waste properties.</p>
+            
+            <div class="search-filter">
+                <input type="text" id="material-search" placeholder="Search materials...">
+                <select id="material-project-filter">
+                    <option value="">All Projects</option>
+                    <!-- Will be populated by JavaScript -->
+                </select>
+                <select id="material-subproject-filter">
+                    <option value="">All Subprojects</option>
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <table id="material-table">
+                <thead>
+                    <tr>
+                        <th>Material Name</th>
+                        <th>Waste Factor</th>
+                        <th>Waste Types</th>
+                        <th>Project</th>
+                        <th>Subproject</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+            
+            <div class="material-details">
+                <h3>Add/Edit Material</h3>
+                <div class="form-group">
+                    <label for="material-name">Material Name:</label>
+                    <input type="text" id="material-name" placeholder="e.g. welding rod">
+                    <div class="error" id="material-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="material-waste-factor">Waste Factor:</label>
+                    <input type="number" id="material-waste-factor" step="0.001" placeholder="e.g. 0.12">
+                    <div class="error" id="material-waste-factor-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="material-waste-types">Waste Types:</label>
+                    <select id="material-waste-types" multiple>
+                    </select>
+                    <div class="error" id="material-waste-types-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="material-project">Project:</label>
+                    <select id="material-project">
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="material-subproject">Subproject:</label>
+                    <select id="material-subproject">
+                        <option value="">Select a project first</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="material-category">Category:</label>
+                    <select id="material-category">
+                        <option value="materials">Materials</option>
+                        <option value="rawMaterials">Raw Materials</option>
+                        <option value="additionalMaterials">Additional Materials</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button id="add-material-btn">Add Material</button>
+                    <button id="update-material-btn" style="display: none;">Update Material</button>
+                    <button id="cancel-material-edit" style="display: none;">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Waste Types Section -->
+        <div id="waste-types" class="content-section">
+            <h2>Waste Types</h2>
+            <p>Manage different types of waste produced in manufacturing processes.</p>
+            
+            <div class="search-filter">
+                <input type="text" id="waste-search" placeholder="Search waste types...">
+            </div>
+            
+            <ul class="waste-type-list" id="waste-type-list">
+                <!-- Will be populated by JavaScript -->
+            </ul>
+            
+            <div class="material-details">
+                <h3>Add Waste Type</h3>
+                <div class="form-group">
+                    <label for="new-waste-type">Waste Type Name:</label>
+                    <input type="text" id="new-waste-type" placeholder="e.g. toxic_fumes">
+                    <div class="error" id="waste-type-error"></div>
+                </div>
+                <div class="action-buttons">
+                    <button id="add-waste-type-btn">Add Waste Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+  <script>
+    function showMain() {
+      userData = DataManager.load();
+        
+      const mainList = document.getElementById('main-list');
+      mainList.innerHTML = '';
+        
+      //  遍历 userData.projects 并渲染
+      Object.keys(userData.projects).forEach(projectName => {
+        const projectItem = createProjectItem(projectName, 0);
+        mainList.appendChild(projectItem);
+    
+        // 添加子项目
+        const projectData = userData.projects[projectName];
+        createNestedStructureFromData(projectItem, projectData);
+      });
+    
+      // 显示主视图
+      document.getElementById('main-view').style.display = 'block';
+      document.getElementById('data-manager-view').style.display = 'none';
+    }
+
+
+    function showDataManager() {
+      DataManager.save();
+      document.getElementById('main-view').style.display = 'none';
+      document.getElementById('data-manager-view').style.display = 'block';
+
+      setTimeout(() => {
+        setupMaterialSection();  // 重新设置材料部分
+      }, 10);
+
+      setTimeout(() => {
+        const $select = $('#material-waste-types');
+        if (!$select.hasClass('select2-hidden-accessible')) {
+          $select.select2({
+            placeholder: 'Wähle Abfallarten...',
+            width: '100%',
+            allowClear: true
+          });
+        } else {
+          $select.trigger('change.select2');
+        }
+      }, 0);
+    }
+
+    // 初始化加载 userData
+    document.addEventListener('DOMContentLoaded', () => {
+      userData = DataManager.load();
+    });
+  </script>
+
+  <!-- 脚本引用放后面确保页面结构加载完成 -->
+  <script src="co2_LCA_project.js"></script>
+  <script src="wasteDataManager.js"></script>
+</body>
+</html>
