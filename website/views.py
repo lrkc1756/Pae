@@ -13,9 +13,10 @@ views = Blueprint('views', __name__)
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
+    _ = app.jinja_env.globals['_'] 
     print("Current language:", g.get('current_lang', 'de'))
     demonstrator = [
-        {"name": ("LCA"), "description": ("Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes"), "image": "lca.png", "link":url_for('views.lca')},
+        {"name": ("LCA"), "description": _('lca'), "image": "lca.png", "link":url_for('views.lca')},
         {"name": "Eco Design", "description": "Veranschaulichung Nachhaltigkeit durch intelligentes Design", "image": "eco_design.png"},
         {"name": "Ganzheitliches Energiemanagement", "description": "Veranschaulichung Emissions-reduzierung durch Energie", "image": "ganzheitliches.png"},
         {"name": "Energy Measurement", "description": "Erreichen von hochauflösender Erfassung von Energie- und Stoffströmen", "image": "energy.png"},

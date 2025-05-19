@@ -21,14 +21,14 @@
 
 
 
-    <h1 align="center" class="dark-gray-text">Arbeitspaket 3</h1>
+    <h1 align="center" class="dark-gray-text">{{ _('arbeitspaket_3') }}</h1>
 </br>
-      <a>LCA Demonstrator hier probieren: <a href="{{url_for('views.lca')}}">UCB LCA Demonstrator</a> 
+      <p>{{ _('probieren') }}<a href="{{url_for('views.lca')}}">{{ _('demonstrator') }}</a></p>
 </br>
 
 
 <div class="container-fluid mt-4">
-  <h2>Demonstratoren</h2>
+  <h2>{{ _('demo_h2') }}</h2>
   <div class="row justify-content-between">
       {% for demo in demonstrator %} 
       <div class="col-md-6 mb-4 d-flex align-items-stretch">
@@ -56,7 +56,7 @@
     <div class="full-width-bg white">
     </br> 
 
-    <h1 align="center">Arbeitspaket 4</h1>
+    <h1 align="center">{{ _('arbeitspaket_4') }}</h1>
   </br> 
     <p>Webinare/Seminare Erinnerung mit Outlook: <a href="https://www.openlca.org/features/">Teams Calendar</a></p>
     <p>View Event on Eventbrite: </p>
@@ -85,7 +85,7 @@
 <div class="full-width-bg tea-leaf"> 
   </br>
 
-    <h1 align="center">Arbeitspaket 5</h1>
+    <h1 align="center">{{ _('arbeitspaket_5') }}</h1>
 </br>
     <p>Another Webinare/Seminare Erinnerung mit Outlook: <a href="https://www.openlca.org/features/">Teams Calendar</a></p>
     <p>Another View Event on Eventbrite: </p>

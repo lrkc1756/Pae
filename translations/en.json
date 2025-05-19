@@ -1,5 +1,15 @@
 {
     "arbeitspaket_1": "Work Package 1",
-    "arbeitspaket_2": "Work Package 2"
+
+    
+    "arbeitspaket_2": "Work Package 2", 
+    "probieren": "Test the LCA Demonstrator here: ",
+    "demonstrator": "UCB LCA Demonstrator",
+
+    "arbeitspaket_3": "Work Package 3",
+    "demo_h2": "The Demonstrator",
+    "lca": "Development of a software to display CO2 footprint",
+
+    "arbeitspaket_4": "Work Package 4", 
+    "arbeitspaket_5": "Work Package 5"
   }
-  

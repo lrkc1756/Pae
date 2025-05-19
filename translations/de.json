@@ -1,5 +1,14 @@
 {
     "arbeitspaket_1": "Arbeitspaket 1",
-    "arbeitspaket_2": "Arbeitspaket 2"
+    
+    "arbeitspaket_2": "Arbeitspaket 2",
+    "probieren": "Testen Sie hier den LCA-Demonstrator: ",
+    "demonstrator": "UCB LCA Demonstrator",
+
+    "arbeitspaket_3": "Arbeitspaket 3",
+    "demo_h2": "Der Demonstrator",
+    "lca": "Entwicklung einer Software, zur Darstellung des CO2 Fußabdruckes", 
+
+    "arbeitspaket_4": "Arbeitspaket 4",
+    "arbeitspaket_5": "Arbeitspaket 5"
   }
-  

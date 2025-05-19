@@ -1,5 +1,15 @@
 {
     "arbeitspaket_1": "Forfait de travail 1",
-    "arbeitspaket_2": "Forfait de travail 2"
+    
+    "arbeitspaket_2": "Forfait de travail 2",
+    "probieren": "Testez le démonstrateur LCA ici : ",
+    "demonstrator": "UCB Ökobilanz-Demonstrator",
+
+    "arbeitspaket_3": "Forfait de travail 3", 
+    "demo_h2": "Le démonstrateur",
+    "lca": "Développement d'un logiciel permettant d'afficher l'empreinte CO2",
+
+    "arbeitspaket_4": "Forfait de travail 4", 
+    "arbeitspaket_5": "Forfait de travail 5"
   }
-  
+
