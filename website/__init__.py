@@ -1,33 +1,46 @@
-from flask import Flask, request
+from flask import Flask, request, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_babel import Babel, _
 import os
+import json
 
 db = SQLAlchemy()
-babel = Babel()
 DB_NAME = "database.db"
+TRANSLATIONS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'translations')
+
+
+def load_translations():
+    translations = {}
+    for filename in os.listdir(TRANSLATIONS_DIR):
+        if filename.endswith('.json'):
+            lang = filename[:-5]  # e.g., "en" from "en.json"
+            with open(os.path.join(TRANSLATIONS_DIR, filename), encoding='utf-8') as f:
+                translations[lang] = json.load(f)
+    return translations
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    app.config['BABEL_DEFAULT_LOCALE'] = 'de'
-    app.config['BABEL_SUPPORTED_LOCALES'] = ['de', 'en', 'fr']
-    app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
-
+    app.config['SUPPORTED_LANGUAGES'] = ['en', 'de', 'fr']
+ 
     db.init_app(app)
+    
+    translations = load_translations() 
+    
 
-    # Use the new Babel 4 locale_selector approach
-    def get_locale():
+    # Language selection logic
+    @app.before_request
+    def set_language():
         lang = request.args.get('lang')
-        if lang in app.config['BABEL_SUPPORTED_LOCALES']:
-            return lang
-        return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+        if lang not in app.config['SUPPORTED_LANGUAGES']:
+            lang = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'])
+        g.current_lang = lang or 'de'
 
-    babel.init_app(app, locale_selector=get_locale)
+    # Translation function
+    def _(text):
+        return translations.get(g.get('current_lang', 'de'), {}).get(text, text)
 
-    app.jinja_env.add_extension('jinja2.ext.i18n')
     app.jinja_env.globals.update(_=_)
 
     from .views import views
