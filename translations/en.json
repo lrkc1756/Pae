@@ -9,7 +9,18 @@
     "arbeitspaket_3": "Work Package 3",
     "demo_h2": "The Demonstrator",
     "lca": "Development of a software to display CO2 footprint",
+    "eco_design": "Eco Design", 
+    "eco_design_d": "Illustrating sustainability through intelligent design",
+    "ganz_energie": "Holistic Energy Management",
+    "ganz_energie_d": "Illustration of emission reduction through energy",
+    "energie_manage": "Energy Measurement",
+    "energie_manage_d": "Achieving high-resolution recording of energy and material flows",
+    "plastic_recycle": "Plastic Recycling", 
+    "plastic_recycle_d": "Incorporation of production waste into new parts",
 
     "arbeitspaket_4": "Work Package 4", 
+    "webinar": "Webinar/Seminar Reminder with Outlook: ",
+    "eventbrite": "View event on Eventbrite: ",
+
     "arbeitspaket_5": "Work Package 5"
   }

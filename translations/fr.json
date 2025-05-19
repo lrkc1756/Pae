@@ -8,8 +8,19 @@
     "arbeitspaket_3": "Forfait de travail 3", 
     "demo_h2": "Le démonstrateur",
     "lca": "Développement d'un logiciel permettant d'afficher l'empreinte CO2",
+    "eco_design": "Éco-conception",
+    "eco_design_d": "Illustrer la durabilité grâce à une conception intelligente",
+    "ganz_energie": "Gestion holistique de l'énergie",
+    "ganz_energie_d": "Illustration de la réduction des émissions grâce à l'énergie",
+    "energie_manage": "Mesure de l'énergie",
+    "energie_manage_d": "Réaliser un enregistrement haute résolution des flux d'énergie et de matières",
+    "plastic_recycle": "Recyclage du plastique",
+    "plastic_recycle_d": "Incorporation des déchets de production dans de nouvelles pièces",
 
     "arbeitspaket_4": "Forfait de travail 4", 
+    "webinar": "Rappel de webinaire/séminaire avec Outlook: ",
+    "eventbrite": "Voir l'événement sur Eventbrite: ",
+
     "arbeitspaket_5": "Forfait de travail 5"
   }
 

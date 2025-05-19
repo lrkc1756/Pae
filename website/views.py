@@ -17,10 +17,10 @@ def home():
     print("Current language:", g.get('current_lang', 'de'))
     demonstrator = [
         {"name": ("LCA"), "description": _('lca'), "image": "lca.png", "link":url_for('views.lca')},
-        {"name": "Eco Design", "description": "Veranschaulichung Nachhaltigkeit durch intelligentes Design", "image": "eco_design.png"},
-        {"name": "Ganzheitliches Energiemanagement", "description": "Veranschaulichung Emissions-reduzierung durch Energie", "image": "ganzheitliches.png"},
-        {"name": "Energy Measurement", "description": "Erreichen von hochauflösender Erfassung von Energie- und Stoffströmen", "image": "energy.png"},
-        {"name": "Plastic Recycling", "description": "Einarbeitung von Produktions-abfall in neue Teile", "image": "plastic_recycling.png"}, 
+        {"name": _('eco_design'), "description": _('eco_design_d'), "image": "eco_design.png"},
+        {"name": _('ganz_energie'), "description": _('ganz_energie_d'), "image": "ganzheitliches.png"},
+        {"name": _('energie_manage'), "description": _('energie_manage_d'), "image": "energy.png"},
+        {"name": _('plastic_recycle'), "description": _('plastic_recycle_d'), "image": "plastic_recycling.png"}, 
         {"name": "", "description": "", "image":"logo.png"}
     ]
 
