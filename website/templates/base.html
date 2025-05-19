@@ -34,14 +34,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
-          <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="{{ url_for('views.home', lang=lang) }}">Start</a>
-          <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo', lang=lang) }}">Demo</a>
-          <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about', lang=lang) }}">Über Uns</a>
-          <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact', lang=lang) }}">Kontakt</a>
+          <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="{{ url_for('views.home', lang=lang) }}">{{_('start')}}</a>
+          <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo', lang=lang) }}">{{_('demo')}}</a>
+          <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about', lang=lang) }}">{{_('uber_uns')}}</a>
+          <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact', lang=lang) }}">{{_('kontakt')}}</a>
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link {% if request.path == '/logout' %}active{% endif %}" id="logout" href="{{ url_for('auth.logout', lang=lang) }}">Logout</a>
+          <a class="nav-item nav-link {% if request.path == '/logout' %}active{% endif %}" id="logout" href="{{ url_for('auth.logout', lang=lang) }}">{{_('logout')}}</a>
           {% else %}
-          <a class="nav-item nav-link {% if request.path == '/login' or request.path == '/sign-up' %}active{% endif %}" id="login" href="{{ url_for('auth.login', lang=lang) }}">Anmelden</a>
+          <a class="nav-item nav-link {% if request.path == '/login' or request.path == '/sign-up' %}active{% endif %}" id="login" href="{{ url_for('auth.login', lang=lang) }}">{{_('register')}}</a>
           {% endif %}
         </div>
       </div>
@@ -95,20 +95,20 @@
           <div class="col-md-6 mb-3">
             <h6 class="text-uppercase fw-bold pae-text">Pae-e-green</h6>
             <p class="tea-leaf-text">
-              Für eine nachhaltigere digitale Zukunft.
+              {{_('nach_zukunft')}}
             </p>
           </div>
           <div class="col-md-3 mb-3">
             <h6 class="text-uppercase pae-text">Links</h6>
             <ul class="list-unstyled">
-              <li><a href="/about" class="text-decoration-none tea-leaf-text">Über Uns</a></li>
-              <li><a href="/contact" class="text-decoration-none tea-leaf-text">Kontakt</a></li>
-              <li><a href="/impressum" class="text-decoration-none tea-leaf-text">Impressum</a></li>
-              <li><a href="/privacy" class="text-decoration-none tea-leaf-text">Datenschutz</a></li>
+              <li><a href="/about" class="text-decoration-none tea-leaf-text">{{_('uber_uns')}}</a></li>
+              <li><a href="/contact" class="text-decoration-none tea-leaf-text">{{_('kontakt')}}</a></li>
+              <li><a href="/impressum" class="text-decoration-none tea-leaf-text">{{_('impressum')}}</a></li>
+              <li><a href="/privacy" class="text-decoration-none tea-leaf-text">{{_('datenschutz')}}</a></li>
             </ul>
           </div>
           <div class="col-md-3 mb-3">
-            <h6 class="text-uppercase pae-text">Kontakt</h6>
+            <h6 class="text-uppercase pae-text">{{_('kontakt')}}</h6>
             <p class="mb-1 tea-leaf-text">Email: info@umwelt-campus.de</p>
           </div>
         </div>

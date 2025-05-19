@@ -1,9 +1,20 @@
 {
+    "uber_uns": "Über Uns",
+    "kontakt": "Kontakt",
+    "demo": "Demo", 
+    "start": "Start", 
+    "logout": "Ausloggen", 
+    "register": "Anmelden", 
+    "nach_zukunft":"Für eine nachhaltigere digitale Zukunft.",
+    "impressum": "Impressum", 
+    "datenschutz": "Datenschutz",
+    
     "arbeitspaket_1": "Arbeitspaket 1",
     
     "arbeitspaket_2": "Arbeitspaket 2",
     "probieren": "Testen Sie hier den LCA-Demonstrator: ",
     "demonstrator": "UCB LCA Demonstrator",
+
 
     "arbeitspaket_3": "Arbeitspaket 3",
     "demo_h2": "Der Demonstrator",
