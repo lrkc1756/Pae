@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, url_for, g, current_app as app
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, g, current_app as app
 from flask_login import login_required, current_user
 from .models import User, Lca
 from . import db
@@ -15,6 +15,10 @@ views = Blueprint('views', __name__)
 def home():
     _ = app.jinja_env.globals['_'] 
     print("Current language:", g.get('current_lang', 'de'))
+    
+    if not current_user.is_authenticated:
+        return redirect(url_for('auth.login'))  # Adjust 'auth.login' to match your login route
+
     demonstrator = [
         {"name": ("LCA"), "description": _('lca'), "image": "lca.png", "link":url_for('views.lca')},
         {"name": _('eco_design'), "description": _('eco_design_d'), "image": "eco_design.png"},
@@ -28,10 +32,11 @@ def home():
 
 @views.route('/contact')
 def contact():
+    _ = app.jinja_env.globals['_']
     # Dynamic data
     people = [
-        {"name": "Prof. Dr. -Ing. Matthias Vette-Steinkamp", "email": "m.vette-steinkamp@umwelt-campus.de", "description": "Projektleiter", "image": "matthias.png", "tel": "+49 6782 17 1881"},
-        {"name": "Rida Ahmed, M.Sc", "email": "R.Ahmed@umwelt-campus.de", "description": "Projektleiterin", "image": "rida.png", "tel": "+49 678217-1534"}
+        {"name": "Prof. Dr. -Ing. Matthias Vette-Steinkamp", "email": "m.vette-steinkamp@umwelt-campus.de", "description": _('projektleiter'), "image": "matthias.png", "tel": "+49 6782 17 1881"},
+        {"name": "Rida Ahmed, M.Sc", "email": "R.Ahmed@umwelt-campus.de", "description": _('projektleiterin'), "image": "rida.png", "tel": "+49 678217-1534"}
     ]
     return render_template("contact.html", people=people, user=current_user)
 
