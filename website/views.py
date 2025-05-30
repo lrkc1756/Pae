@@ -52,3 +52,16 @@ def about():
 @views.route('/lca')
 def lca():
     return render_template("LCA_SPA.html", user=current_user)
+
+@views.route('/impressum')
+def impressum():
+    return render_template("impressum.html", user=current_user)
+
+@views.route('/datenschutz')
+def datenschutz():
+    return render_template("datenschutz.html", user=current_user)
+
+@views.route('/barrier')
+def barrier():
+    return render_template("barrier.html", user=current_user)
+
