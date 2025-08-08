@@ -5,7 +5,9 @@ from . import db
 import json
 import json
 import os
-
+import pandas as pd
+import plotly.graph_objs as go
+import plotly.io as pio
 
 
 views = Blueprint('views', __name__)
@@ -65,3 +67,39 @@ def datenschutz():
 def barrier():
     return render_template("barrier.html", user=current_user)
 
+@views.route('/upload_lca', methods=['GET', 'POST'])
+@login_required
+def upload_lca():
+    chart = None
+
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and file.filename.endswith('.xlsx'):
+            upload_dir = os.path.join(os.getcwd(), 'uploads')
+            os.makedirs(upload_dir, exist_ok=True)
+
+            filepath = os.path.join(upload_dir, file.filename)
+            file.save(filepath)
+
+            # Load Excel and create graph (basic example)
+            import pandas as pd
+            import matplotlib.pyplot as plt
+            import io, base64
+
+            df = pd.read_excel(filepath)
+            categories = df.columns[1:]
+            values = df.iloc[0, 1:]
+
+            # Create graph
+            plt.figure(figsize=(10, 5))
+            plt.bar(categories, values)
+            plt.xticks(rotation=45, ha='right')
+            plt.tight_layout()
+
+            img = io.BytesIO()
+            plt.savefig(img, format='png')
+            img.seek(0)
+            chart = f'<img src="data:image/png;base64,{base64.b64encode(img.read()).decode()}"/>'
+            plt.close()
+
+    return render_template("upload_lca.html", chart=chart, user=current_user)

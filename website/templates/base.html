@@ -36,6 +36,7 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" id="home" href="{{ url_for('views.home', lang=lang) }}">{{_('start')}}</a>
           <a class="nav-item nav-link {% if request.path == '/demo' %}active{% endif %}" id="demo" href="{{ url_for('views.demo', lang=lang) }}">{{_('demo')}}</a>
+          <a class="nav-item nav-link {% if request.path == '/upload_lca' %}active{% endif %}" id="upload_lca" href="{{ url_for('views.upload_lca', lang=lang) }}">Ökobilanz-Upload</a>
           <a class="nav-item nav-link {% if request.path == '/about' %}active{% endif %}" id="about_us" href="{{ url_for('views.about', lang=lang) }}">{{_('uber_uns')}}</a>
           <a class="nav-item nav-link {% if request.path == '/contact' %}active{% endif %}" id="contact" href="{{ url_for('views.contact', lang=lang) }}">{{_('kontakt')}}</a>
           {% if user.is_authenticated %}
