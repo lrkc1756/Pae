@@ -42,6 +42,44 @@
     "vertreten":"Vertreten durch",
     "verant": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV",
     "off":"Offizielles Impressum der Hochschule Trier",
-    "dte":"Datenschutzerklärung"
+    "dte":"Datenschutzerklärung",
+
+    "datenschutz_title": "Datenschutzerklärung",
+    "ds_intro": "Diese Seite informiert über die Datenverarbeitung im Rahmen des Projekts PAE eGreen. Maßgeblich ist die offizielle Datenschutzerklärung der Hochschule Trier:",
+    "ds_official_link_text": "Offizielle Datenschutzerklärung der Hochschule Trier",
+
+    "ds_controller_h": "Verantwortliche Stelle",
+    "ds_purposes_h": "Zwecke der Verarbeitung",
+    "ds_purpose_site": "Bereitstellung und Betrieb der Website (technische Auslieferung, Stabilität, Sicherheit).",
+    "ds_purpose_contact": "Bearbeitung von Anfragen, sofern Sie uns per E-Mail kontaktieren.",
+
+    "ds_data_categories_h": "Kategorien personenbezogener Daten",
+    "ds_server_logs": "Server-Logdaten (IP-Adresse gekürzt/anonymisiert, Datum/Uhrzeit, aufgerufene URL, Referrer, User-Agent) zur Gewährleistung des technischen Betriebs.",
+    "ds_contact_fields": "Kommunikationsdaten (z. B. E-Mail-Adresse, Inhalt der Anfrage), sofern Sie uns kontaktieren.",
+    "ds_anon_analytics": "Gegebenenfalls anonymisierte Nutzungsdaten, sofern eine rein technische Reichweitenmessung erfolgt.",
+
+    "ds_legal_basis_h": "Rechtsgrundlagen",
+    "ds_legal_basis_text": "Die Verarbeitung erfolgt nach Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Betrieb, Sicherheit und Optimierung der Website) sowie Art. 6 Abs. 1 lit. b DSGVO (Kommunikation/Vertragserfüllung), soweit Sie uns kontaktieren. Sofern eine Einwilligung erforderlich ist, erfolgt die Verarbeitung nach Art. 6 Abs. 1 lit. a DSGVO.",
+
+    "ds_cookies_h": "Cookies",
+    "ds_cookies_text": "Diese Seite verwendet nur technisch notwendige Cookies (falls überhaupt). Es werden keine Tracking-Cookies für Werbezwecke gesetzt.",
+
+    "ds_embeds_h": "Eingebettete Inhalte (z. B. YouTube)",
+    "ds_embeds_text": "Beim Abspielen eingebetteter YouTube-Videos können Daten (z. B. IP-Adresse) an YouTube/Google übertragen werden. Wo möglich, nutzen wir den erweiterten Datenschutzmodus über ",
+
+    "ds_recipients_h": "Empfänger und Hosting",
+    "ds_recipients_text": "Die Website wird über die Infrastruktur der Hochschule Trier betrieben bzw. gehostet. Eine Übermittlung in Drittländer findet nicht statt, es sei denn, sie ist für eingebettete Inhalte technisch erforderlich (z. B. YouTube).",
+
+    "ds_retention_h": "Speicherdauer",
+    "ds_retention_text": "Server-Logdaten werden nur für den technischen Betrieb und zur Fehleranalyse vorübergehend gespeichert und anschließend gelöscht oder anonymisiert. Kommunikationsdaten werden nach Abschluss der Bearbeitung und unter Beachtung gesetzlicher Aufbewahrungsfristen gelöscht.",
+
+    "ds_rights_h": "Ihre Rechte",
+    "ds_rights_text": "Sie haben nach der DSGVO insbesondere das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Widerspruch (Art. 21) sowie auf Datenübertragbarkeit (Art. 20). Zudem haben Sie das Recht, erteilte Einwilligungen jederzeit mit Wirkung für die Zukunft zu widerrufen.",
+
+    "ds_dsb_h": "Datenschutzbeauftragte*r",
+    "ds_dsb_text": "Kontaktdaten der/des Datenschutzbeauftragten der Hochschule Trier finden Sie in der offiziellen Datenschutzerklärung. Bei Fragen zur Datenverarbeitung im Projekt PAE eGreen wenden Sie sich bitte an die dort angegebenen Stellen.",
+
+    "off": "Offizielles Impressum der Hochschule Trier",
+    "dte": "Datenschutzerklärung"
 
   }

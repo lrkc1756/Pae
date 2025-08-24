@@ -42,6 +42,44 @@
     "vertreten":"Represented by",
     "verant": "Responsible for the content in accordance with Section 55 (2) of the German Interstate Broadcasting Agreement (RStV)",
     "off":"Official Imprint of Trier University of Applied Sciences",
-    "dte":"Privacy Policy"
+    "dte":"Privacy Policy",
+
+    "datenschutz_title": "Privacy Policy",
+    "ds_intro": "This page provides information about data processing within the PAE eGreen project. The official privacy policy of Trier University of Applied Sciences is authoritative:",
+    "ds_official_link_text": "Official Privacy Policy of Trier University of Applied Sciences",
+
+    "ds_controller_h": "Controller",
+    "ds_purposes_h": "Purposes of Processing",
+    "ds_purpose_site": "Provision and operation of the website (technical delivery, stability, security).",
+    "ds_purpose_contact": "Handling of inquiries, if you contact us by e-mail.",
+
+    "ds_data_categories_h": "Categories of Personal Data",
+    "ds_server_logs": "Server log data (IP address shortened/anonymized, date/time, requested URL, referrer, user agent) for ensuring technical operation.",
+    "ds_contact_fields": "Communication data (e.g., e-mail address, content of inquiry) if you contact us.",
+    "ds_anon_analytics": "Possibly anonymized usage data, if purely technical reach measurement is performed.",
+
+    "ds_legal_basis_h": "Legal Bases",
+    "ds_legal_basis_text": "Processing is based on Art. 6(1)(f) GDPR (legitimate interest in operating, securing, and optimizing the website) and Art. 6(1)(b) GDPR (communication/contract performance), where you contact us. Where consent is required, processing is based on Art. 6(1)(a) GDPR.",
+
+    "ds_cookies_h": "Cookies",
+    "ds_cookies_text": "This site uses only technically necessary cookies (if any). No tracking cookies for advertising purposes are set.",
+
+    "ds_embeds_h": "Embedded Content (e.g., YouTube)",
+    "ds_embeds_text": "When playing embedded YouTube videos, data (e.g., IP address) may be transmitted to YouTube/Google. Where possible, we use the privacy-enhanced mode via youtube-nocookie.com.",
+
+    "ds_recipients_h": "Recipients and Hosting",
+    "ds_recipients_text": "The website is operated/hosted via the infrastructure of Trier University of Applied Sciences. No transfer to third countries takes place, unless technically required for embedded content (e.g., YouTube).",
+
+    "ds_retention_h": "Retention Period",
+    "ds_retention_text": "Server log data is stored temporarily for technical operation and error analysis and then deleted or anonymized. Communication data is deleted after processing, subject to statutory retention requirements.",
+
+    "ds_rights_h": "Your Rights",
+    "ds_rights_text": "Under the GDPR, you have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), objection (Art. 21), and data portability (Art. 20). You also have the right to withdraw consent at any time with effect for the future.",
+
+    "ds_dsb_h": "Data Protection Officer",
+    "ds_dsb_text": "The contact details of the Data Protection Officer of Trier University of Applied Sciences can be found in the official privacy policy. For questions about data processing in the PAE eGreen project, please contact the offices indicated there.",
+
+    "off": "Official Imprint of Trier University of Applied Sciences",
+    "dte": "Privacy Policy"
 
 }

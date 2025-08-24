@@ -1,26 +1,79 @@
 {% extends "base.html" %}
-{% block title %}About Us{% endblock %}
+{% block title %}{{ _('datenschutz_title') }}{% endblock %}
 
 {% block content %}
-<div class="full-width-bg light-gray">
-<div class="container mt-4">
-    <h2>About Us</h2>
-</br> 
-    
-    <h3>Umwelt-Campus Birkenfeld, Hochschule Trier</h3>
-    <p>
-        Umwelt-Campus Birkenfeld is a unique institution of Hochschule Trier, located in a beautiful natural environment. It focuses on sustainability, environmental studies, and practical applications of technology to create a better future.
+<div class="full-width-bg tea-leaf">
+  <div class="container mt-4">
+    <h1>{{ _('datenschutz_title') }}</h1>
+
+    <p class="mb-4">
+      {{ _('ds_intro') }}
+      <a href="https://www.hochschule-trier.de/datenschutz" target="_blank" rel="noopener noreferrer">
+        {{ _('ds_official_link_text') }}
+      </a>.
     </p>
 
-    <h3>About the LCA Demonstrator</h3>
+    <h2>{{ _('ds_controller_h') }}</h2>
+    <address>
+      <strong>Hochschule Trier – Umwelt-Campus Birkenfeld</strong><br>
+      Projekt PAE eGreen<br>
+      Campusallee<br>
+      55768 Hoppstädten-Weiersbach<br>
+      Deutschland
+    </address>
+
+    <h2 class="mt-4">{{ _('ds_purposes_h') }}</h2>
+    <ul>
+      <li>{{ _('ds_purpose_site') }}</li>
+      <li>{{ _('ds_purpose_contact') }}</li>
+    </ul>
+
+    <h2 class="mt-4">{{ _('ds_data_categories_h') }}</h2>
+    <ul>
+      <li>{{ _('ds_server_logs') }}</li>
+      <li>{{ _('ds_contact_fields') }}</li>
+      <li>{{ _('ds_anon_analytics') }}</li>
+    </ul>
+
+    <h2 class="mt-4">{{ _('ds_legal_basis_h') }}</h2>
+    <p>{{ _('ds_legal_basis_text') }}</p>
+
+    <h2 class="mt-4">{{ _('ds_cookies_h') }}</h2>
+    <p>{{ _('ds_cookies_text') }}</p>
+
+    <h2 class="mt-4">{{ _('ds_embeds_h') }}</h2>
     <p>
-        The LCA Demonstrator is an educational tool designed to provide insight into Life-Cycle Assessment (LCA) principles. It aims to simplify complex topics and enhance learning through a structured, interactive experience.
+      {{ _('ds_embeds_text') }}
+      <code>youtube-nocookie.com</code>.
     </p>
 
-    <h3>Mission Statement</h3>
+    <h2 class="mt-4">{{ _('ds_recipients_h') }}</h2>
+    <p>{{ _('ds_recipients_text') }}</p>
+
+    <h2 class="mt-4">{{ _('ds_retention_h') }}</h2>
+    <p>{{ _('ds_retention_text') }}</p>
+
+    <h2 class="mt-4">{{ _('ds_rights_h') }}</h2>
+    <p>{{ _('ds_rights_text') }}</p>
+
+    <h2 class="mt-4">{{ _('ds_dsb_h') }}</h2>
     <p>
-        Our mission is to promote sustainability and environmental awareness through technology, education, and practical solutions. We strive to make LCA concepts accessible to all through innovative tools and resources.
+      {{ _('ds_dsb_text') }}
+      <a href="https://www.hochschule-trier.de/datenschutz" target="_blank" rel="noopener noreferrer">
+        {{ _('ds_official_link_text') }}
+      </a>.
     </p>
+
+    <hr class="my-4">
+
+    <p>
+      <a href="https://www.hochschule-trier.de/impressum" target="_blank" rel="noopener noreferrer">
+        {{ _('off') }}
+      </a><br>
+      <a href="https://www.hochschule-trier.de/datenschutz" target="_blank" rel="noopener noreferrer">
+        {{ _('dte') }}
+      </a>
+    </p>
+  </div>
 </div>
-</div> 
 {% endblock %}

@@ -41,6 +41,44 @@
     "vertreten":"Représenté par",
     "verant": "Responsable du contenu conformément à l'article 55 (2) de la Convention interétatique allemande sur la radiodiffusion (RStV)",
     "off":"Mentions légales officielles de l'Université des sciences appliquées de Trèves",
-    "dte":"Politique de confidentialité"
+    "dte":"Politique de confidentialité",
+
+    "datenschutz_title": "Politique de confidentialité",
+    "ds_intro": "Cette page fournit des informations sur le traitement des données dans le cadre du projet PAE eGreen. La politique de confidentialité officielle de la Hochschule de Trèves fait foi :",
+    "ds_official_link_text": "Politique de confidentialité officielle de la Hochschule de Trèves",
+
+    "ds_controller_h": "Responsable du traitement",
+    "ds_purposes_h": "Finalités du traitement",
+    "ds_purpose_site": "Mise à disposition et fonctionnement du site web (diffusion technique, stabilité, sécurité).",
+    "ds_purpose_contact": "Traitement des demandes, si vous nous contactez par e-mail.",
+
+    "ds_data_categories_h": "Catégories de données personnelles",
+    "ds_server_logs": "Données des journaux de serveur (adresse IP abrégée/anonymisée, date/heure, URL demandée, référent, user agent) pour assurer le fonctionnement technique.",
+    "ds_contact_fields": "Données de communication (par ex. adresse e-mail, contenu de la demande) si vous nous contactez.",
+    "ds_anon_analytics": "Données d’utilisation éventuellement anonymisées, si une mesure d’audience purement technique est effectuée.",
+
+    "ds_legal_basis_h": "Bases légales",
+    "ds_legal_basis_text": "Le traitement est fondé sur l’art. 6(1)(f) RGPD (intérêt légitime au fonctionnement, à la sécurité et à l’optimisation du site web) et sur l’art. 6(1)(b) RGPD (communication/exécution contractuelle), lorsque vous nous contactez. Lorsque le consentement est requis, le traitement est fondé sur l’art. 6(1)(a) RGPD.",
+
+    "ds_cookies_h": "Cookies",
+    "ds_cookies_text": "Ce site utilise uniquement des cookies techniquement nécessaires (le cas échéant). Aucun cookie de suivi à des fins publicitaires n’est installé.",
+
+    "ds_embeds_h": "Contenus intégrés (par ex. YouTube)",
+    "ds_embeds_text": "Lors de la lecture de vidéos YouTube intégrées, des données (par ex. adresse IP) peuvent être transmises à YouTube/Google. Lorsque cela est possible, nous utilisons le mode de confidentialité renforcée via youtube-nocookie.com.",
+
+    "ds_recipients_h": "Destinataires et hébergement",
+    "ds_recipients_text": "Le site web est exploité/hébergé via l’infrastructure de la Hochschule de Trèves. Aucune transmission vers des pays tiers n’a lieu, sauf si cela est techniquement nécessaire pour les contenus intégrés (par ex. YouTube).",
+
+    "ds_retention_h": "Durée de conservation",
+    "ds_retention_text": "Les données des journaux de serveur sont temporairement conservées pour le fonctionnement technique et l’analyse des erreurs, puis supprimées ou anonymisées. Les données de communication sont supprimées après traitement, sous réserve des obligations légales de conservation.",
+
+    "ds_rights_h": "Vos droits",
+    "ds_rights_text": "Conformément au RGPD, vous avez le droit d’accès (art. 15), de rectification (art. 16), d’effacement (art. 17), de limitation (art. 18), d’opposition (art. 21) et de portabilité des données (art. 20). Vous avez également le droit de retirer votre consentement à tout moment, avec effet pour l’avenir.",
+
+    "ds_dsb_h": "Délégué à la protection des données",
+    "ds_dsb_text": "Les coordonnées du délégué à la protection des données de la Hochschule de Trèves figurent dans la politique de confidentialité officielle. Pour toute question relative au traitement des données dans le projet PAE eGreen, veuillez contacter les services indiqués.",
+
+    "off": "Mentions légales officielles de la Hochschule de Trèves",
+    "dte": "Politique de confidentialité"
   }
 
