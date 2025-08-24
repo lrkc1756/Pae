@@ -80,6 +80,32 @@
     "ds_dsb_text": "The contact details of the Data Protection Officer of Trier University of Applied Sciences can be found in the official privacy policy. For questions about data processing in the PAE eGreen project, please contact the offices indicated there.",
 
     "off": "Official Imprint of Trier University of Applied Sciences",
-    "dte": "Privacy Policy"
+    "dte": "Privacy Policy",
+
+    "a11y_title": "Accessibility Statement",
+    "a11y_intro": "The PAE eGreen project website aims to be accessible in line with applicable accessibility standards.",
+    "a11y_conformance_h": "Conformance Status",
+    "a11y_conformance_text": "This site follows the WCAG 2.1 guidelines (Level AA) to the extent feasible within the project scope.",
+    "a11y_measures_h": "Measures We Take",
+    "a11y_measure_colors": "Contrast: color palette chosen to meet at least WCAG AA contrast.",
+    "a11y_measure_typography": "Typography: readable font sizes, line heights, and sufficient spacing.",
+    "a11y_measure_structure": "Structure: semantic HTML and a clear heading hierarchy.",
+    "a11y_measure_keyboard": "Keyboard access: navigation and interaction designed to work without a mouse where possible.",
+    "a11y_measure_media": "Alternatives: text alternatives for images/icons; privacy-friendly video embedding.",
+    "a11y_status_h": "Current Status",
+    "a11y_status_text": "Key pages and components have been manually reviewed. We will continue improving other areas as resources allow.",
+    "a11y_known_issues_h": "Known Issues",
+    "a11y_issue_iframes": "Embedded content (e.g., YouTube) may introduce additional barriers.",
+    "a11y_issue_docs": "Some linked documents/files may not fully meet accessibility criteria.",
+    "a11y_issue_aria": "ARIA attributes are being refined to better support assistive technologies.",
+    "a11y_feedback_h": "Feedback & Contact",
+    "a11y_feedback_text": "If you encounter barriers or inaccessible content, please let us know. We will try to remedy the issue promptly.",
+    "a11y_contact": "Contact",
+    "a11y_phone": "Phone",
+    "a11y_enforcement_h": "Enforcement Procedure",
+    "a11y_enforcement_text": "If you do not receive a satisfactory response within a reasonable time, you can contact the responsible bodies at Trier University or the supervisory authority in Rhineland-Palatinate.",
+    "a11y_last_update": "Last updated",
+    "off1": "Official Imprint of Trier University of Applied Sciences",
+    "dte1": "Privacy Policy"
 
 }

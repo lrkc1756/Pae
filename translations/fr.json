@@ -79,6 +79,32 @@
     "ds_dsb_text": "Les coordonnées du délégué à la protection des données de la Hochschule de Trèves figurent dans la politique de confidentialité officielle. Pour toute question relative au traitement des données dans le projet PAE eGreen, veuillez contacter les services indiqués.",
 
     "off": "Mentions légales officielles de la Hochschule de Trèves",
-    "dte": "Politique de confidentialité"
+    "dte": "Politique de confidentialité",
+
+    "a11y_title": "Déclaration d’accessibilité",
+  "a11y_intro": "Le site du projet PAE eGreen vise à être accessible conformément aux normes d’accessibilité applicables.",
+  "a11y_conformance_h": "Statut de conformité",
+  "a11y_conformance_text": "Ce site suit les directives WCAG 2.1 (niveau AA) dans la mesure du possible dans le cadre du projet.",
+  "a11y_measures_h": "Mesures mises en œuvre",
+  "a11y_measure_colors": "Contraste : palette de couleurs visant au minimum la conformité WCAG AA.",
+  "a11y_measure_typography": "Typographie : tailles de police lisibles, interlignes et espacements suffisants.",
+  "a11y_measure_structure": "Structure : HTML sémantique et hiérarchie claire des titres.",
+  "a11y_measure_keyboard": "Clavier : navigation et interactions possibles sans souris lorsque c’est faisable.",
+  "a11y_measure_media": "Alternatives : textes alternatifs pour images/icônes ; intégration vidéo respectueuse de la vie privée.",
+  "a11y_status_h": "État actuel",
+  "a11y_status_text": "Les pages et composants clés ont été revus manuellement. D’autres améliorations seront apportées en fonction des ressources.",
+  "a11y_known_issues_h": "Problèmes connus",
+  "a11y_issue_iframes": "Les contenus intégrés (p. ex. YouTube) peuvent introduire des obstacles supplémentaires.",
+  "a11y_issue_docs": "Certains documents/fichiers liés peuvent ne pas respecter entièrement les critères d’accessibilité.",
+  "a11y_issue_aria": "Les attributs ARIA sont continuellement améliorés pour mieux prendre en charge les technologies d’assistance.",
+  "a11y_feedback_h": "Retour & contact",
+  "a11y_feedback_text": "Si vous rencontrez des obstacles ou des contenus inaccessibles, merci de nous en informer. Nous ferons de notre mieux pour y remédier rapidement.",
+  "a11y_contact": "Contact",
+  "a11y_phone": "Téléphone",
+  "a11y_enforcement_h": "Procédure de recours",
+  "a11y_enforcement_text": "Si vous ne recevez pas de réponse satisfaisante dans un délai raisonnable, vous pouvez contacter les services responsables de la Hochschule de Trèves ou l’autorité de contrôle en Rhénanie-Palatinat.",
+  "a11y_last_update": "Dernière mise à jour",
+  "off1": "Mentions légales officielles de la Hochschule de Trèves",
+  "dte1": "Politique de confidentialité"
   }
 

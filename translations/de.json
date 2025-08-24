@@ -80,6 +80,32 @@
     "ds_dsb_text": "Kontaktdaten der/des Datenschutzbeauftragten der Hochschule Trier finden Sie in der offiziellen Datenschutzerklärung. Bei Fragen zur Datenverarbeitung im Projekt PAE eGreen wenden Sie sich bitte an die dort angegebenen Stellen.",
 
     "off": "Offizielles Impressum der Hochschule Trier",
-    "dte": "Datenschutzerklärung"
+    "dte": "Datenschutzerklärung",
+
+    "a11y_title": "Erklärung zur Barrierefreiheit",
+    "a11y_intro": "Die Projektwebsite PAE eGreen ist bestrebt, ihre Webseiten im Einklang mit den geltenden Barrierefreiheitsstandards zugänglich zu gestalten.",
+    "a11y_conformance_h": "Konformitätsstatus",
+    "a11y_conformance_text": "Diese Website orientiert sich an den WCAG 2.1 Richtlinien (Level AA), soweit es im Rahmen des Projekts möglich ist.",
+    "a11y_measures_h": "Getroffene Maßnahmen",
+    "a11y_measure_colors": "Kontraste: Farbpalette mit ausreichendem Kontrast (mindestens WCAG AA) gewählt.",
+    "a11y_measure_typography": "Typografie: gut lesbare Schriftgrößen, Zeilenhöhen und ausreichende Abstände.",
+    "a11y_measure_structure": "Struktur: semantische HTML-Elemente und nachvollziehbare Überschriften-Hierarchie.",
+    "a11y_measure_keyboard": "Tastaturbedienung: Navigation und Interaktion möglichst ohne Maus nutzbar.",
+    "a11y_measure_media": "Alternativen: Textalternativen für Bilder/Icons; Videos mit datenschutzfreundlicher Einbettung.",
+    "a11y_status_h": "Aktueller Stand",
+    "a11y_status_text": "Die wichtigsten Seiten und Komponenten wurden manuell geprüft. Wir verbessern schrittweise weitere Bereiche, sobald Ressourcen verfügbar sind.",
+    "a11y_known_issues_h": "Bekannte Barrieren",
+    "a11y_issue_iframes": "Eingebettete Inhalte (z. B. YouTube) können zusätzliche Barrieren mit sich bringen.",
+    "a11y_issue_docs": "Einzelne verlinkte Dokumente/Dateien erfüllen ggf. nicht vollständig die Barrierefreiheitskriterien.",
+    "a11y_issue_aria": "ARIA-Attribute werden fortlaufend nachgebessert, um Hilfstechnologien besser zu unterstützen.",
+    "a11y_feedback_h": "Feedback und Kontakt",
+    "a11y_feedback_text": "Wenn Sie Barrieren feststellen oder Inhalte nicht zugänglich sind, informieren Sie uns bitte. Wir bemühen uns um schnelle Abhilfe.",
+    "a11y_contact": "Kontakt",
+    "a11y_phone": "Telefon",
+    "a11y_enforcement_h": "Durchsetzungsverfahren",
+    "a11y_enforcement_text": "Sollten Sie innerhalb angemessener Frist keine zufriedenstellende Antwort erhalten, können Sie sich an die zuständigen Stellen der Hochschule Trier bzw. an die Aufsichtsbehörde in Rheinland-Pfalz wenden.",
+    "a11y_last_update": "Letzte Aktualisierung",
+    "off1": "Offizielles Impressum der Hochschule Trier",
+    "dte1": "Datenschutzerklärung"
 
   }
