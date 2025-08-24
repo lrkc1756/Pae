@@ -36,5 +36,12 @@
     "arbeitspaket_5": "Work Package 5",
 
     "projektleiter": "Project Manager",
-    "projektleiterin": "Project Manager"
-  }
+    "projektleiterin": "Project Manager",
+
+    "angabe": "Information in accordance with Section 5 of the German Telemedia Act (TMG)",
+    "vertreten":"Represented by",
+    "verant": "Responsible for the content in accordance with Section 55 (2) of the German Interstate Broadcasting Agreement (RStV)",
+    "off":"Official Imprint of Trier University of Applied Sciences",
+    "dte":"Privacy Policy"
+
+}

@@ -36,5 +36,12 @@
     "arbeitspaket_5": "Arbeitspaket 5", 
 
     "projektleiter": "Projektleiter",
-    "projektleiterin": "Projektleiterin"
+    "projektleiterin": "Projektleiterin",
+
+    "angabe": "Angaben gemäß § 5 TMG",
+    "vertreten":"Vertreten durch",
+    "verant": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV",
+    "off":"Offizielles Impressum der Hochschule Trier",
+    "dte":"Datenschutzerklärung"
+
   }

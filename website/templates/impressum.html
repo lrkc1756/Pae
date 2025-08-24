@@ -2,25 +2,49 @@
 {% block title %}Impressum{% endblock %}
 
 {% block content %}
-<div class="full-width-bg light-gray">
-<div class="container mt-4">
-    <h2>Impressum</h2>
-</br> 
-    
-    <h3>Umwelt-Campus Birkenfeld, Hochschule Trier</h3>
+<div class="full-width-bg tea-leaf">
+  <div class="container mt-4">
+    <h1>{{ _('impressum') }}</h1>
+
+    <h2>{{ _('angabe') }}</h2>
+    <address>
+      <strong>Hochschule Trier – Umwelt-Campus Birkenfeld</strong><br>
+      Projekt PAE eGreen<br>
+      Campusallee<br>
+      55768 Hoppstädten-Weiersbach<br>
+      Deutschland
+    </address>
+
+    <h3>{{ _('vertreten') }}</h3>
     <p>
-        Umwelt-Campus Birkenfeld is a unique institution of Hochschule Trier, located in a beautiful natural environment. It focuses on sustainability, environmental studies, and practical applications of technology to create a better future.
+      Prof. Dr. Vettesteinkamp<br>
+      Rida Ahmed
     </p>
 
-    <h3>About the LCA Demonstrator</h3>
+    <h3>{{ _('kontakt') }}</h3>
     <p>
-        The LCA Demonstrator is an educational tool designed to provide insight into Life-Cycle Assessment (LCA) principles. It aims to simplify complex topics and enhance learning through a structured, interactive experience.
+      E-Mail: <a href="mailto:info@hochschule-trier.de">info@hochschule-trier.de</a><br>
+      Telefon: +49 (0)6782 17-0
     </p>
 
-    <h3>Mission Statement</h3>
+    <h3>{{ _('verant') }}</h3>
     <p>
-        Our mission is to promote sustainability and environmental awareness through technology, education, and practical solutions. We strive to make LCA concepts accessible to all through innovative tools and resources.
+      Prof. Dr. Vettesteinkamp<br>
+      Rida Ahmed<br>
+      Hochschule Trier – Umwelt-Campus Birkenfeld<br>
+      Campusallee, 55768 Hoppstädten-Weiersbach
     </p>
+
+    <hr class="my-4">
+
+    <p>
+      <a href="https://www.hochschule-trier.de/impressum" target="_blank" rel="noopener noreferrer">
+        {{ _('off') }}
+      </a><br>
+      <a href="https://www.hochschule-trier.de/datenschutz" target="_blank" rel="noopener noreferrer">
+        {{ _('dte') }}
+      </a>
+    </p>
+  </div>
 </div>
-</div> 
 {% endblock %}
