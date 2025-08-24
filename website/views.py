@@ -12,8 +12,12 @@ import plotly.io as pio
 
 views = Blueprint('views', __name__)
 
-
 @views.route('/', methods=['GET', 'POST'])
+def root():
+    return redirect(url_for('auth.login'))
+
+
+@views.route('/home', methods=['GET', 'POST'])
 def home():
     _ = app.jinja_env.globals['_'] 
     print("Current language:", g.get('current_lang', 'de'))
