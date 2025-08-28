@@ -96,7 +96,7 @@ def upload_lca():
 
 
         try:
-            # === 1) read the LAST sheet (your edited 'Car' sheet) ===
+            # === 1) read the LAST sheet (edited 'Car' sheet) ===
             xls = pd.ExcelFile(filepath)
             last_sheet = xls.sheet_names[-1]
             df = pd.read_excel(filepath, sheet_name=last_sheet)

@@ -11,6 +11,9 @@
     "barrier": "Barrierefreiheit",
     
     "arbeitspaket_1": "Arbeitspaket 1",
+    "fragebogen": "AP2 - Fragebogen zur Bewertung des CO2-Fußabdrucks für KMU",
+    "forms": "Microsoft Teams-Formular", 
+
     
     "arbeitspaket_2": "Arbeitspaket 2",
     "probieren": "Testen Sie hier den LCA-Demonstrator: ",
@@ -107,5 +110,6 @@
     "a11y_last_update": "Letzte Aktualisierung",
     "off1": "Offizielles Impressum der Hochschule Trier",
     "dte1": "Datenschutzerklärung"
+
 
   }
